@@ -30,6 +30,7 @@ Route::get('/', function () {
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/connection', [ConnectionController::class, 'index']);
 
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

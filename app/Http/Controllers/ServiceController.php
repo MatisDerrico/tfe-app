@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ServiceController extends Controller
 {
     public function index()
     {
-        return Service::all();
+         $services = Service::all();
+
+        return Inertia::render('Services/index', [
+            'services' => $services,
+        ]);
     }
+
+
 }

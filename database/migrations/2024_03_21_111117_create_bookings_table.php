@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
+            $table->id(); // Géré automatiquement par mysql
+            $table->unsignedInteger('user_id');
             $table->dateTime('date');
             $table->unsignedInteger('employee_id');
-            $table->timestamps();
+            $table->timestamps(); // Updated et created at géré par laravel par défaut
         });
     }
 
