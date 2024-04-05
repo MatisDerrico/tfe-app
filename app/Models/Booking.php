@@ -9,7 +9,9 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $dateFormat = 'd/m/y';
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y - h:i',
+    ];
 
     // Une réservation est liée à un utilisateur
     public function user()
@@ -28,6 +30,13 @@ class Booking extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    // On fait appel à la relation services en lui incluant une méthode sum qui permettra de calculer le cout de tous les services
+    public function servicesTotalCost()
+    {
+        // return $this->services()->sum('price');
+        return $this->belongsToMany(Service::class)->sum('price');
     }
 
 }
