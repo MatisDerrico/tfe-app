@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Booking;
+use App\Models\Employee;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +34,7 @@ Route::get('/', function () {
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/connection', [ConnectionController::class, 'index'])->name('connection.index');
 Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 
 
 Route::get('/dashboard', function () {

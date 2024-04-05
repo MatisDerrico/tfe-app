@@ -13,6 +13,7 @@
                     <thead class="bg-gray-50">
                         <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Utilisateurs</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nom de l'employé</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Services commandés</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Prix</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date de réservation</th>
@@ -21,6 +22,7 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="booking in bookings">
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ booking.user.name }}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ booking.employee.name }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                            <p v-for="service in booking.services"> {{ service.name }} </p>
                         </td>
@@ -30,6 +32,9 @@
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {{ booking.created_at}}
                         </td>
+                        <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                           <p v-for="employee in booking.employees"> {{ employee.name }} </p>
+                        </td> -->
                         </tr>
                     </tbody>
                     </table>
