@@ -16,4 +16,11 @@ class Service extends Model
      {
          return $this->belongsToMany(Booking::class);
      }
+
+     // Un employé peut réalisé plusieurs services
+
+     public function employee()
+     {
+         return $this->belongsToMany(Employee::class);
+     }
 }

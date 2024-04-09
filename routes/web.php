@@ -31,17 +31,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
-Route::get('/connection', [ConnectionController::class, 'index'])->name('connection.index');
-Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
+
 
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/connection', [ConnectionController::class, 'index'])->name('connection.index');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
+    Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

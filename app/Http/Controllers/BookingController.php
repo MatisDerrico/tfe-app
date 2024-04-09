@@ -17,7 +17,7 @@ class BookingController extends Controller
 
 
 
-        $bookings = Booking::with(['user','services','employee'])
+        $bookings = Booking::with(['user','services.employee',])
 
         /**
          * Grâce à la méthode withcount, elle permet de compter l'ensemble des services liés à la réservation et le query->select qui est une fonction callback permet de calculer le total des services trouvés.

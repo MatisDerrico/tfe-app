@@ -15,7 +15,7 @@ class EmployeeController extends Controller
 
         // Récuparation des connections avec les données des utilisateurs
 
-        $employees = Employee::with('bookings')->get();
+        $employees = Employee::with('services')->get();
 
 
         return Inertia::render('Employees/index', [

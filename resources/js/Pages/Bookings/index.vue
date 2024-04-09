@@ -22,9 +22,8 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="booking in bookings">
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ booking.user.name }}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ booking.employee.name }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                           <p v-for="service in booking.services"> {{ service.name }} </p>
+                           <p v-for="service in booking.services"> {{ service.name }} - {{ service.employee[0].name }} </p>
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {{ booking.total }} €
