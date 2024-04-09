@@ -15,13 +15,19 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+     /*
+    génère des données aléatoires, pour créer des noms et des adresses email aléatoires Et un mot de passe fixe password
+    pour chaque utilisateur fictif.
+    */
+
     public function definition(): array
     {
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // une version hachée du mot de passe 'password'
             'remember_token' => Str::random(10),
         ];
     }

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
          ]);
          \App\Models\User::factory()->create();
          \App\Models\Employee::factory(10)
-            ->has(Service::factory()->count(3))
+            ->has(Service::factory()->count(3)) // Un employé a 3 services
             ->create();
          \App\Models\Connection::factory(5)->create();
          \App\Models\Booking::factory()
