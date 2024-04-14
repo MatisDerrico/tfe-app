@@ -95,14 +95,28 @@ const reviews = { href: '#', average: 4, totalCount: 117 }
 
 const selectedColor = ref(product.colors[0])
 const selectedSize = ref(product.sizes[2])
+
+const features = [
+  {
+    name: 'L\'art de la coiffure',
+    description:
+      'Au bout du blaireau, du rasoir, des ciseaux, de la tondeuse… Mademoiselle D’Errico, une barbière passionnée ! Ses mains expertes, son implication, son écoute, son enthousiasme, sa jeunesse, son sens de l’innovation, sans oublier son joli sourire et sa bonne humeur l’ont fait immédiatement sortir du lot !',
+  },
+  { name: 'Un moment de fierté après 7 ans de dévouement', description: '7 années d’expérience qui lui ont déjà valu de remporter, lors d’un Concours International en 2015 à Rotterdam, le Meilleur Prix et la Consécration dans ce petit univers composé d’Hommes exclusivement !' },
+  {
+    name: 'Formations sur mesure : Découvrez les secrets du métier',
+    description:
+      'Pour partager sa passion et son savoir, votre barbière propose des formations « sous réservation » pour les particuliers qualifiés qui souhaitent eux aussi apprendre les techniques, l’art et la maîtrise.',
+  },
+  {  description: "« Mlle D’Errico », Un Petit Bout de « Femme Barbier » au Poil !" },
+]
 </script>
 
 <template>
     <Head title="Welcome" />
 
-    <div
-        class="mt-24 relative sm:flex sm:justify-center sm:items-center min-h-screen"
-    >
+    <div class="bg-black mt-24 relative flex-col sm:flex sm:justify-center sm:items-center min-h-screen">
+
         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 my-6 p-6 text-end">
             <Link
                 v-if="$page.props.auth.user"
@@ -176,7 +190,45 @@ const selectedSize = ref(product.sizes[2])
     </div>
 
 
+    <div>
+    <div class="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+      <div class="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
+        <div>
+          <div class="border-b border-gray-200 pb-10">
+            <h2 class="font-bold text-xl text-white">Mlle D’Errico</h2>
+            <p class="mt-2 text-3xl text-white font-bold tracking-tight sm:text-4xl">Votre barbière à Ixelles : une professionnelle passionnée</p>
+          </div>
+
+          <dl class="mt-10 space-y-10">
+            <div v-for="feature in features" :key="feature.name">
+              <dt class="text-sm font-bold text-white">{{ feature.name }}</dt>
+              <dd class="mt-3 text-sm text-white">{{ feature.description }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div>
+          <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
+            <img src="/manon11.jpg" alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system." class="h-full w-full object-cover object-center" />
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-4 sm:mt-6 sm:gap-6 lg:mt-8 lg:gap-8">
+            <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
+              <img src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-01.jpg" alt="Detail of temperature setting button on kettle bass with digital degree readout." class="h-full w-full object-cover object-center" />
+            </div>
+            <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
+              <img src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-02.jpg" alt="Kettle spout pouring boiling water into coffee grounds in pour-over mug." class="h-full w-full object-cover object-center" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
+    </div>
+
+
+
+
 
 
 </template>
