@@ -167,24 +167,24 @@ const features = [
   </div> -->
 
 
-    <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+    <div class="border-2 border-red-500 mx-auto mt-6 w-full h-[400px] sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
 
-        <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            <img src="/manon6.jpg" alt="Manon1" class="h-full w-full object-cover object-center" />
+        <div class="border-2 border-green-500 w-full h-full">
+            <img src="/manon6.jpg" alt="Manon1" class="border-2 border-blue-500 h-full" />
         </div>
 
-        <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
+        <div class="lg:flex lg:flex-col">
+            <div class=" sm:overflow-hidden sm:rounded-lg">
                 <img src="/manon5.jpg" alt="Manon1" class="h-full w-full object-cover object-center" />
             </div>
 
-            <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
+            <div class="    sm:overflow-hidden sm:rounded-lg">
                 <img src="/manon7.jpg" alt="Manon1" class="h-full w-full object-cover object-center" />
             </div>
         </div>
 
-        <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            <img src="/manon9.jpg" alt="Manon1" class="h-full w-full object-cover object-center" />
+        <div class="    sm:overflow-hidden sm:rounded-lg">
+            <img src="/manon9.jpg" alt="Manon1" class="h-full w-full" />
         </div>
 
     </div>
@@ -208,7 +208,7 @@ const features = [
         </div>
 
         <div>
-          <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
+          <div class="aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
             <img src="/manon11.jpg" alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system." class="h-full w-full object-cover object-center" />
           </div>
           <div class="mt-4 grid grid-cols-2 gap-4 sm:mt-6 sm:gap-6 lg:mt-8 lg:gap-8">
