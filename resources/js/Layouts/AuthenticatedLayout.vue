@@ -32,9 +32,6 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Tableau de bord
                                 </NavLink>
-                                <NavLink :href="route('connection.index')" :active="route().current('connection.index')">
-                                    Connexions
-                                </NavLink>
                                 <NavLink :href="route('service.index')" :active="route().current('service.index')">
                                     Services
                                 </NavLink>

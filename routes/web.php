@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\EmployeeBookingController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
@@ -39,13 +41,23 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
-    Route::get('/connection', [ConnectionController::class, 'index'])->name('connection.index');
-    Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
-    Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+// Route employée
+
+// Pour accéder à la route Employe/bookings il faudra passé le middleware authentification et isEmployee
+
+Route::middleware('auth','isEmployee')->group(function () {
+    Route::get('/employee/bookings', [EmployeeBookingController::class, 'index'])->name('employeeBooking.index');
+
+});
+
+Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
+    Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
+    Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 });
 
 require __DIR__.'/auth.php';

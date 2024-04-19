@@ -18,14 +18,20 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'email' => 'matispgm@hotmail.com',
             'name' => 'Matis',
+            'is_admin' => true
          ]);
+
          \App\Models\User::factory()->create();
+
          \App\Models\Employee::factory(10)
             ->has(Service::factory()->count(3)) // Un employé a 3 services
             ->create();
-         \App\Models\Connection::factory(5)->create();
+
          \App\Models\Booking::factory()
-            ->has(Service::factory())
+            ->has(
+                Service::factory()
+                ->has(Employee::factory())
+                )
             ->create();
     }
 

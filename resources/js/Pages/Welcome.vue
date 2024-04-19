@@ -167,19 +167,19 @@ const features = [
   </div> -->
 
 
-    <div class="border-2 border-red-500 mx-auto mt-6 w-full h-[400px] sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+    <div class="border-2 border-red-500 mx-auto mt-6 w-full h-[600px] sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
 
         <div class="border-2 border-green-500 w-full h-full">
             <img src="/manon6.jpg" alt="Manon1" class="border-2 border-blue-500 h-full" />
         </div>
 
-        <div class="lg:flex lg:flex-col">
+        <div class="lg:flex lg:flex-col lg:justify-between">
             <div class=" sm:overflow-hidden sm:rounded-lg">
-                <img src="/manon5.jpg" alt="Manon1" class="h-full w-full object-cover object-center" />
+                <img src="/manon5.jpg" alt="Manon1" class="border-2 h-full w-full object-cover object-center" />
             </div>
 
             <div class="    sm:overflow-hidden sm:rounded-lg">
-                <img src="/manon7.jpg" alt="Manon1" class="h-full w-full object-cover object-center" />
+                <img src="/manon7.jpg" alt="Manon1" class=" border-2 h-full w-full object-cover object-center" />
             </div>
         </div>
 

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id(); // Géré automatiquement par mysql
             $table->unsignedInteger('user_id');
             $table->dateTime('date');
-            $table->unsignedInteger('employee_id');
             $table->timestamps(); // Updated et created at géré par laravel par défaut
         });
     }
