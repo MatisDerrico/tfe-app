@@ -57,7 +57,11 @@ Route::middleware('auth','isEmployee')->group(function () {
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::post('/services', [ServiceController::class, 'store'])->name('service.store');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
+    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employee.create');
+    Route::post('/employees', [EmployeeController::class, 'store'])->name('employee.store');
 });
 
 require __DIR__.'/auth.php';

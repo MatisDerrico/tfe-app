@@ -11,6 +11,9 @@ class Service extends Model
     // pour ce model désactive la gestion des columns created_at, uptated_at
     public $timestamps = false;
 
+    // Désactive la sécurité du mass asignment
+    protected $guarded = [];
+
      // Un service est lié à plusieurs réservations
      public function bookings()
      {

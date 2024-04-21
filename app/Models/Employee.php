@@ -11,13 +11,16 @@ class Employee extends Model
     // pour ce model désactive la gestion des columns created_at, uptated_at
     public $timestamps = false;
 
+    // Désactive la sécurité du mass asignment
+    protected $guarded = [];
+
     // Un employé peut avoir plusieurs réservations
     public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
 
-    // Un service peut être réalisé par différents employés. 
+    // Un service peut être réalisé par différents employés.
 
     public function services()
     {

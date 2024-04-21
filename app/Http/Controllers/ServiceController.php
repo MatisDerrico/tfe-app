@@ -17,5 +17,22 @@ class ServiceController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('Services/create');
+    }
+
+    // Request c'est un objet qui fait transiter des données d'une page à l'autre
+    // $request c'est la variable qui va contenir une instance de la classe Request
+    public function store(Request $request)
+    {
+        Service::create([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'description'=>$request->description,
+            'duration'=>$request->duration
+        ]);
+    }
+
 
 }

@@ -22,4 +22,18 @@ class EmployeeController extends Controller
             'employees' => $employees,
         ]);
     }
+
+    public function create()
+    {
+        return Inertia::render('Employees/create');
+    }
+
+    public function store(Request $request)
+    {
+        Employee::create([
+            'name'=>$request->name,
+            'type'=>$request->type
+        ]);
+    }
+
 }
