@@ -20,8 +20,11 @@ class ServiceFactory extends Factory
 
         $nameService = ['Barbe', 'Coupe de cheveux', 'coloration', 'lissage brésilien', 'tatouage'];
 
+        $types = ['coiffure', 'tatouage'];
+
         return [
             'name' => Arr::random($nameService), // Choisi aléatoirement un élément parmi la liste des services dans ma variable contenant un tableau
+            'type' => Arr::random($types),
             'price' => fake()->randomNumber(2),
             'duration' => fake()->randomNumber(2),
             'description' =>fake()->sentence(10),

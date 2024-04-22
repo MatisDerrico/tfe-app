@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -25,7 +26,9 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return Inertia::render('Employees/create');
+        $services = Service::all();
+
+        return Inertia::render('Employees/create', ['services' => $services]);
     }
 
     public function store(Request $request)
