@@ -23,13 +23,30 @@
 
                     <InputLabel class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"value="type" />
 
-
-                    <select v-model="form.type" name="type" @change="filterServices">
+                    <select
+                        class="mb-4"
+                        v-model="form.type"
+                        name="type"
+                        @change="filterServices"
+                    >
                         <option></option>
                         <option>Coiffure</option>
                         <option>Tatouage</option>
                     </select>
 
+                    <div
+                        class="mt-4"
+                        v-for="service in filteredServices"
+                        :key="service.id"
+                    >
+                        <input
+                            type="checkbox"
+                            class="rounded-lg"
+                            :value="service.id"
+                            v-model="form.services"
+                        >
+                        <label class="ml-2">{{ service.name }}</label>
+                    </div>
 
                     <div class="border-b border-black/10 pb-12"></div>
 
@@ -51,18 +68,26 @@ import { Head, useForm } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import { ref } from 'vue';
 
-const form = useForm({
+    const form = useForm({
         name: '',
-        type: ''
+        type: '',
+        services : [],
     });
+
+    const filteredServices = ref([]);
 
     const props = defineProps({
         services: Array,
     });
 
     const filterServices = () => {
-        console.log(form.type);
+        const filter = props.services.filter(item => {
+            return item.type === form.type;
+        });
+
+        filteredServices.value = filter;
     };
 
     // Lancement d'une requête POST avec les données de l'objet form
