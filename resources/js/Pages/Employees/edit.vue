@@ -90,8 +90,9 @@ const form = useForm({
 
 const filteredServices = ref([]);
 
+// Le nom employee correspond au nom donné dans la clé du tableau associatif envoyé en deuxième argument de la méthode edit.
 const props = defineProps({
-    services: Array,
+    employee: Array,
 });
 
 const filterServices = () => {
@@ -104,8 +105,6 @@ const filterServices = () => {
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.post("/admin/employees", {
-        onFinish: () => router.get('/admin/employees'),
-    });
+
 };
 </script>

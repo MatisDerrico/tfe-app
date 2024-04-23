@@ -31,12 +31,26 @@ class EmployeeController extends Controller
         return Inertia::render('Employees/create', ['services' => $services]);
     }
 
+
     public function store(Request $request)
     {
-        Employee::create([
+        // Création d'employés
+        $employe = Employee::create([
             'name'=>$request->name,
             'type'=>$request->type
         ]);
+
+        // Association des services à cet employé
+
+        $employe->services()->attach($request->services);
+
+    }
+
+    // On injecte une instance du modèle Employee grâce aux routes model binding
+
+    public function edit(Employee $employe)
+    {
+        return Inertia::render('Employees/edit',['employee' => $employe]);
     }
 
 }
