@@ -48,9 +48,20 @@ class EmployeeController extends Controller
 
     // On injecte une instance du modèle Employee grâce aux routes model binding
 
-    public function edit(Employee $employe)
+    public function edit(Request $request)
     {
+        $employe = Employee::find($request->employe);
         return Inertia::render('Employees/edit',['employee' => $employe]);
+    }
+
+    public function update(Request $request)
+    {
+        $employe = Employee::find($request->employe);
+
+        $employe->update([
+            'name'=>$request->name,
+            'type'=>$request->type
+        ]);
     }
 
 }

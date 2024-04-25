@@ -26,6 +26,11 @@
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             <p v-for="service in employee.services"> {{ service.name }}  </p>
                         </td>
+                        <td>
+                            <button>
+                                <a href="/admin/employees/"></a>
+                            </button>
+                        </td>
                         </tr>
                     </tbody>
                     </table>

@@ -4,7 +4,7 @@
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Création d'employées
+                Edition d'employées
             </h2>
         </template>
 
@@ -79,8 +79,13 @@ import { Head, useForm } from "@inertiajs/vue3";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { router } from '@inertiajs/vue3'
+
+onMounted( () => {
+    form.name = props.employee.name;
+    form.type = props.employee.type;
+})
 
 const form = useForm({
     name: "",
@@ -92,7 +97,7 @@ const filteredServices = ref([]);
 
 // Le nom employee correspond au nom donné dans la clé du tableau associatif envoyé en deuxième argument de la méthode edit.
 const props = defineProps({
-    employee: Array,
+    employee: Object,
 });
 
 const filterServices = () => {
@@ -103,8 +108,10 @@ const filterServices = () => {
     filteredServices.value = filter;
 };
 
-// Lancement d'une requête POST avec les données de l'objet form
+// Lancement d'une requête put avec les données de l'objet form
 const submit = () => {
-
+    form.put("/admin/employees/" + props.employee.id, {
+        onFinish: () => router.get('/admin/employees'),
+    });
 };
 </script>

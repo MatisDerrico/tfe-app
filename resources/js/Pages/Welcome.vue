@@ -320,7 +320,7 @@ const features = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-01.jpg"
+                                    src="/manon13.jpg"
                                     alt="Detail of temperature setting button on kettle bass with digital degree readout."
                                     class="h-full w-full object-cover object-center"
                                 />
@@ -329,7 +329,7 @@ const features = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-02.jpg"
+                                    src="/manon14.jpg"
                                     alt="Kettle spout pouring boiling water into coffee grounds in pour-over mug."
                                     class="h-full w-full object-cover object-center"
                                 />
@@ -341,15 +341,15 @@ const features = [
         </div>
 
         <div
-            class="border-2 border-red-500 mx-auto mt-6 w-full h-auto sm:h-[600px] sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"
+            class="mx-auto mt-6 w-full h-auto sm:h-[600px] sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"
         >
             <div
-                class="hidden lg:block border-2 border-green-500 w-full h-full"
+                class="hidden lg:block w-full h-full"
             >
                 <img
                     src="/manon6.jpg"
                     alt="Manon1"
-                    class="border-2 border-blue-500 h-full"
+                    class="h-full"
                 />
             </div>
 
@@ -360,7 +360,7 @@ const features = [
                     <img
                         src="/manon5.jpg"
                         alt="Manon1"
-                        class="border-2 h-auto w-full object-cover object-center sm:object-cover sm:object-center"
+                        class="h-auto w-full object-cover object-center sm:object-cover sm:object-center"
                     />
                 </div>
 
@@ -368,7 +368,7 @@ const features = [
                     <img
                         src="/manon7.jpg"
                         alt="Manon1"
-                        class="border-2 h-auto w-full object-cover object-center sm:object-cover sm:object-center"
+                        class="h-auto w-full object-cover object-center sm:object-cover sm:object-center"
                     />
                 </div>
             </div>

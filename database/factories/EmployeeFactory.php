@@ -17,7 +17,7 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
-        $types = ['coiffure', 'tatouage'];
+        $types = ['Coiffure', 'Tatouage'];
 
         return [
             'name' => fake()->name(),

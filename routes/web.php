@@ -62,8 +62,9 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employee.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employee.store');
-    Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
-    Route::put('/employees', [EmployeeController::class, 'update'])->name('employee.update');
+    // Route::get('/employees/{employee:id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::get('/employees/{employe}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::put('/employees/{employe}', [EmployeeController::class, 'update'])->name('employee.update');
 });
 
 require __DIR__.'/auth.php';
