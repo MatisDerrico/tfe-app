@@ -11,13 +11,8 @@ class EmployeeController extends Controller
 {
     public function index ()
     {
-        // Récupération de toutes les connections brutes
-        // $connections = Connection::all();
-
-        // Récuparation des connections avec les données des utilisateurs
-
+        // Récupération des connections avec les données des utilisateurs
         $employees = Employee::with('services')->get();
-
 
         return Inertia::render('Employees/index', [
             'employees' => $employees,
@@ -36,22 +31,27 @@ class EmployeeController extends Controller
     {
         // Création d'employés
         $employe = Employee::create([
-            'name'=>$request->name,
-            'type'=>$request->type
+            'name' => $request->name,
+            'type' => $request->type
         ]);
 
         // Association des services à cet employé
-
         $employe->services()->attach($request->services);
-
     }
-
-    // On injecte une instance du modèle Employee grâce aux routes model binding
 
     public function edit(Request $request)
     {
         $employe = Employee::find($request->employe);
-        return Inertia::render('Employees/edit',['employee' => $employe]);
+
+        $services = Service::where('type', $employe->type)->get();
+
+        $employeeServicesProvided = $employe->services->pluck('id');
+
+        return Inertia::render('Employees/edit',[
+            'employee' => $employe,
+            'services' => $services,
+            'providedServices' => $employeeServicesProvided
+        ]);
     }
 
     public function update(Request $request)
@@ -59,9 +59,15 @@ class EmployeeController extends Controller
         $employe = Employee::find($request->employe);
 
         $employe->update([
-            'name'=>$request->name,
-            'type'=>$request->type
+            'name' => $request->name,
+            'type' => $request->type
         ]);
     }
 
+    public function destroy(Request $request)
+    {
+        $employee = Employee::find($request->employe);
+
+        $employee->delete();
+    }
 }

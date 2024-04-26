@@ -45,10 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-// Route employée
 
 // Pour accéder à la route Employe/bookings il faudra passé le middleware authentification et isEmployee
-
 Route::middleware('auth','isEmployee')->group(function () {
     Route::get('/employee/bookings', [EmployeeBookingController::class, 'index'])->name('employeeBooking.index');
 
@@ -62,9 +60,9 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employee.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employee.store');
-    // Route::get('/employees/{employee:id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
     Route::get('/employees/{employe}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
     Route::put('/employees/{employe}', [EmployeeController::class, 'update'])->name('employee.update');
+    Route::delete('/employees/{employe}/delete', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 });
 
 require __DIR__.'/auth.php';

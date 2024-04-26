@@ -1,10 +1,10 @@
 <template>
-    <Head title="Dashboard" />
+    <Head title="Edition employé" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edition d'employées
+                Mise à jour d'employé
             </h2>
         </template>
 
@@ -14,58 +14,63 @@
                     class="bg-white overflow-hidden shadow-sm p-6 sm:rounded-lg"
                 >
                     <form @submit.prevent="submit">
-                        <InputLabel
-                            class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                            value="name"
-                        />
-
-                        <TextInput
-                            type="text"
-                            class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            placeholder="Manon"
-                            v-model="form.name"
-                            required
-                        />
-
-                        <InputLabel
-                            class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
-                            value="type"
-                        />
-
-                        <select
-                            class="mb-4"
-                            v-model="form.type"
-                            name="type"
-                            @change="filterServices"
-                        >
-                            <option></option>
-                            <option>Coiffure</option>
-                            <option>Tatouage</option>
-                        </select>
-
-                        <div
-                            class="mt-4"
-                            v-for="service in filteredServices"
-                            :key="service.id"
-                        >
-                            <input
-                                type="checkbox"
-                                class="rounded-lg"
-                                :value="service.id"
-                                v-model="form.services"
+                        <div class="flex flex-col items-center">
+                            <InputLabel
+                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                value="Nom"
                             />
-                            <label class="ml-2">{{ service.name }}</label>
+
+                            <TextInput
+                                type="text"
+                                class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                v-model="form.name"
+                                required
+                            />
+
+                            <InputLabel
+                                class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                value="Type de service"
+                            />
+
+                            <select
+                                class="my-4 rounded-lg"
+                                v-model="form.type"
+                                name="type"
+                                @change="filterServices"
+                                disabled
+                            >
+                                <option></option>
+                                <option>Coiffure</option>
+                                <option>Tatouage</option>
+                            </select>
+
+                            <div
+                                class="mt-4"
+                                v-for="service in props.services"
+                                :key="service.id"
+                            >
+                                <input
+                                    type="checkbox"
+                                    class="rounded-lg"
+                                    :value="service.id"
+                                    v-model="form.services"
+                                />
+
+                                <label class="ml-2">
+                                    {{ service.name }}
+                                </label>
+                            </div>
+
+                            <div class="border-b border-black/10 pb-12"></div>
+
+                            <PrimaryButton
+                                class="ms-4 mt-4"
+                                :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing"
+                            >
+                                Confirmez
+                            </PrimaryButton>
                         </div>
-
-                        <div class="border-b border-black/10 pb-12"></div>
-
-                        <PrimaryButton
-                            class="ms-4 mt-4"
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                        >
-                            Confirmez
-                        </PrimaryButton>
                     </form>
                 </div>
             </div>
@@ -85,6 +90,7 @@ import { router } from '@inertiajs/vue3'
 onMounted( () => {
     form.name = props.employee.name;
     form.type = props.employee.type;
+    form.services =  props.providedServices;
 })
 
 const form = useForm({
@@ -98,15 +104,9 @@ const filteredServices = ref([]);
 // Le nom employee correspond au nom donné dans la clé du tableau associatif envoyé en deuxième argument de la méthode edit.
 const props = defineProps({
     employee: Object,
+    services: Array,
+    providedServices: Array,
 });
-
-const filterServices = () => {
-    const filter = props.services.filter((item) => {
-        return item.type === form.type;
-    });
-
-    filteredServices.value = filter;
-};
 
 // Lancement d'une requête put avec les données de l'objet form
 const submit = () => {

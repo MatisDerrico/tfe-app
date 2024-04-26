@@ -30,4 +30,22 @@ class ServiceFactory extends Factory
             'description' =>fake()->sentence(10),
         ];
     }
+
+    public function barber(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'Coiffure',
+            ];
+        });
+    }
+
+    public function tatoo(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'Tatouage',
+            ];
+        });
+    }
 }

@@ -24,4 +24,22 @@ class EmployeeFactory extends Factory
             'type' => Arr::random($types),
         ];
     }
+
+    public function barber(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'Coiffure',
+            ];
+        });
+    }
+
+    public function tatoo(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'Tatouage',
+            ];
+        });
+    }
 }

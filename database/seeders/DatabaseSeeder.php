@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\Employee;
+use App\Models\User;
+use App\Models\Booking;
 use App\Models\Service;
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,25 +16,43 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory()->create([
+        // Création d'un utilisateur avec un compte admin
+        User::factory()->create([
             'email' => 'matispgm@hotmail.com',
             'name' => 'Matis',
             'is_admin' => true
          ]);
 
-         \App\Models\User::factory()->create();
-
-         \App\Models\Employee::factory(10)
-            ->has(Service::factory()->count(3)) // Un employé a 3 services
+        // Création de services de coiffure avec un employé attitré pour chaque service
+        $barberServices = Service::factory()
+            ->barber()
+            ->count(2)
+            ->has(Employee::factory()->barber())
+            ->state(new Sequence(
+                ['name' => 'Bigoudis'],
+                ['name' => 'Lissage californien'],
+            ))
             ->create();
 
-         \App\Models\Booking::factory()
-            ->has(
-                Service::factory()
-                ->has(Employee::factory())
-                )
+        // Création de services de tatouage avec un employé attitré pour chaque service
+        $tatooServices = Service::factory()
+            ->tatoo()
+            ->count(2)
+            ->has(Employee::factory()->tatoo())
+            ->state(new Sequence(
+                ['name' => 'Tribal'],
+                ['name' => 'Mahori'],
+            ))
+            ->create();
+
+        // Création d'une réservation avec des services de tatouage
+        Booking::factory()
+            ->hasAttached($tatooServices)
+            ->create();
+
+        // Création d'une réservation avec des services de coiffure
+        Booking::factory()
+            ->hasAttached($barberServices)
             ->create();
     }
-
-
 }
