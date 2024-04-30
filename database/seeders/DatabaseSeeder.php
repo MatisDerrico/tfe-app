@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true
          ]);
 
+         User::factory()->create([
+            'email' => 'adminIfosup@hotmail.com',
+            'name' => 'adminIfosup',
+            'is_admin' => true
+         ]);
+
         // Création de services de coiffure avec un employé attitré pour chaque service
         $barberServices = Service::factory()
             ->barber()

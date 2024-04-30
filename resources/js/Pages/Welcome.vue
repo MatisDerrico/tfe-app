@@ -1,5 +1,7 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
+import PageFooter from "@/Components/PageFooter.vue";
+import NavBar from "@/Components/NavBar.vue";
 
 defineProps({
     canLogin: {
@@ -28,17 +30,14 @@ import {
 
 const cards = [
     {
-        name: "Sales",
         description: "Ouvert aujourd'hui de : 10h00 - 18h30",
         icon: ClockIcon,
     },
     {
-        name: "Technical Support",
         description: "28 avenue Guillaume Gilbert 1050 Ixelles",
         icon: PhoneIcon,
     },
     {
-        name: "Media Inquiries",
         description: "02 726 46 66",
         icon: MapPinIcon,
     },
@@ -130,34 +129,10 @@ const features = [
     <Head title="Welcome" />
 
     <div
-        class="bg-black mt-24 relative flex-col sm:flex sm:justify-center sm:items-center min-h-screen"
+        class="bg-black relative flex-col sm:flex sm:justify-center sm:items-center min-h-screen"
     >
-        <div
-            v-if="canLogin"
-            class="sm:fixed sm:top-0 sm:right-0 my-6 p-6 text-end"
-        >
-            <Link
-                v-if="$page.props.auth.user"
-                :href="route('dashboard')"
-                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                >Dashboard</Link
-            >
 
-            <template v-else>
-                <Link
-                    :href="route('login')"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >Log in</Link
-                >
-
-                <Link
-                    v-if="canRegister"
-                    :href="route('register')"
-                    class="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >Register</Link
-                >
-            </template>
-        </div>
+        <NavBar/>
 
         <div
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
@@ -232,7 +207,7 @@ const features = [
                     <div
                         v-for="card in cards"
                         :key="card.name"
-                        class="flex gap-x-4 rounded-xl bg-white/5 p-6 ring-1 ring-inset ring-white/10"
+                        class="flex items-center justify-center gap-x-4 rounded-xl bg-white/5 p-6 ring-1 ring-inset ring-white/10"
                     >
                         <component
                             :is="card.icon"
@@ -240,10 +215,7 @@ const features = [
                             aria-hidden="true"
                         />
                         <div class="text-base leading-7">
-                            <h3 class="font-semibold text-white">
-                                {{ card.name }}
-                            </h3>
-                            <p class="mt-2 text-white">
+                            <p class="text-white">
                                 {{ card.description }}
                             </p>
                         </div>
@@ -265,6 +237,9 @@ const features = [
                     vous accueille dans un espace exclusivement masculin pour
                     prendre soin de vous et vous chouchouter chers messieurs.
                 </p>
+                <button type="button" class="rounded-md mt-4 bg-zinc-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400">
+                    RÉSERVER
+                </button>
             </div>
         </div>
 
@@ -377,5 +352,9 @@ const features = [
                 <img src="/manon9.jpg" alt="Manon1" class="h-full w-full" />
             </div>
         </div>
+
+        <PageFooter />
+
+
     </div>
 </template>

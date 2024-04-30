@@ -58,6 +58,12 @@ class EmployeeController extends Controller
     {
         $employe = Employee::find($request->employe);
 
+        // Supprimer la liste des services de cet employé
+        $employe->services()->detach();
+
+        // Attribuer les nouveaux services sélectionnés à cet employé
+        $employe->services()->attach($request->services);
+
         $employe->update([
             'name' => $request->name,
             'type' => $request->type
@@ -67,6 +73,9 @@ class EmployeeController extends Controller
     public function destroy(Request $request)
     {
         $employee = Employee::find($request->employe);
+
+        // Supprimer la liste des services de cet employé
+        $employee->services()->detach();
 
         $employee->delete();
     }

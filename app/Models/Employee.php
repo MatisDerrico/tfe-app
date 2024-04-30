@@ -27,5 +27,10 @@ class Employee extends Model
         return $this->belongsToMany(Service::class);
     }
 
+    public function employeeBookings()
+    {
+        return $this->belongsToMany(Booking::class);
+    }
+
 
 }

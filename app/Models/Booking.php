@@ -39,4 +39,9 @@ class Booking extends Model
         return $this->belongsToMany(Service::class)->sum('price');
     }
 
+    public function bookingsEmployee()
+    {
+        return $this->belongsToMany(Employee::class);
+    }
+
 }

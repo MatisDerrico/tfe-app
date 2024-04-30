@@ -52,6 +52,8 @@ Route::middleware('auth','isEmployee')->group(function () {
 
 });
 
+Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
+
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
@@ -64,5 +66,10 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::put('/employees/{employe}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employees/{employe}/delete', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 });
+
+Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function () {
+    Route::get('/bookings', [EmployeeBookingController::class, 'index'])->name('booking.index');
+});
+
 
 require __DIR__.'/auth.php';
