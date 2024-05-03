@@ -5,6 +5,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\EmployeeBookingController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GallerieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Booking;
@@ -53,10 +54,11 @@ Route::middleware('auth','isEmployee')->group(function () {
 });
 
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
+Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
+Route::get('/gallerie', GallerieController::class);
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
-    Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
     Route::get('/services/create', [ServiceController::class, 'create'])->name('service.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('service.store');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');

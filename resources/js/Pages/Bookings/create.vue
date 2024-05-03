@@ -64,6 +64,20 @@
                                 </div>
                             </div>
 
+                            <div v-for="service in filteredServices">
+                                <input type="checkbox"
+                                v-model="form.servicesChoosen"
+                                :value="service"
+                                @change="calculateTotalPrice(service.price)" >
+
+                                <h2>{{ service.name }}</h2>
+                                <p>{{ service.price }}</p>
+                            </div>
+
+                            <div>
+                                prixtotal: {{ form.price }};
+                            </div>
+
 
 
 
@@ -94,9 +108,10 @@
     const form = useForm({
         name: '',
         firstName: '',
-        email: ''
+        email: '',
+        servicesChoosen: [],
+        price: 0,
     });
-
 
     const filteredServices = ref([]);
 
@@ -108,12 +123,23 @@
 
     const filterServices = (type) => {
         chooseYourType.value = type;
+
         const filter = props.services.filter((item) => {
             return item.type === type;
         });
 
         filteredServices.value = filter;
     };
+
+    // Elle calcul le prix total des services sélectionnés
+
+    const calculateTotalPrice = () => {
+        form.price = 0; // Réinitialise la variable prix à 0
+
+        form.servicesChoosen.forEach((service)=>{
+            form.price += service.price;
+        });
+    }
 
     // Lancement d'une requête POST avec les données de l'objet form
     const submit = () => {
