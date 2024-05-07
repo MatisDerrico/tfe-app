@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id(); // Géré automatiquement par mysql
-            $table->unsignedInteger('user_id');
+            $table->string('name');
+            $table->string('email');
             $table->dateTime('date');
             $table->timestamps(); // Updated et created at géré par laravel par défaut
         });

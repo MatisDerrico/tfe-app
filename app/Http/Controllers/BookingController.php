@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Employee;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,9 +43,11 @@ class BookingController extends Controller
     public function create()
     {
         $services = Service::all();
+        $employees = Employee::all();
 
         return Inertia::render('Bookings/create', [
             'services' => $services,
+            'employees' => $employees,
         ]);
     }
 }

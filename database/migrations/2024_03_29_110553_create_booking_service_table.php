@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('booking_service', function (Blueprint $table) {
             $table->integer('booking_id');
             $table->integer('service_id');
+            $table->integer('employee_id')->nullable();
+
         });
     }
 

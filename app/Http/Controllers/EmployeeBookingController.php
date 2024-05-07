@@ -12,10 +12,12 @@ class EmployeeBookingController extends Controller
     {
         $employee = Auth::user(); // Récuperation des données de l'utilisateur connecté
 
-        $employeeBookings = $employee->bookings; // Récupération des réservations rattachées à cet employé
+        $bookings = $employee->employeeBookings; // Récupération des réservations rattachées à cet employé
+
+        dd($bookings);
 
         return Inertia::render('EmployeeBooking/index', [
-            'employeeBookings' => $employeeBookings,
+            'bookings' => $bookings,
         ]);
     }
 }

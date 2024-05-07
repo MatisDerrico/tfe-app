@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,7 +25,7 @@ class ServiceController extends Controller
 
     // Request c'est un objet qui fait transiter des données d'une page à l'autre
     // $request c'est la variable qui va contenir une instance de la classe Request
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         Service::create([
             'name'=>$request->name,

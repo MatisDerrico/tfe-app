@@ -25,6 +25,8 @@
                                     required
                                 />
 
+                                <InputError class="mt-2" :message="form.errors.name" />
+
                             </div>
 
                             <div class="w-1/8">
@@ -39,6 +41,8 @@
                                 />
                             </div>
 
+                            <InputError class="mt-2" :message="form.errors.price" />
+
                         </div>
 
                             <div>
@@ -51,13 +55,17 @@
                                     required
                                 />
                             </div>
-                            
+
+                            <InputError class="mt-2" :message="form.errors.duration" />
+
                             <InputLabel class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"value="description" />
 
                             <textarea
                                 class="block w-1/2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 v-model="form.description">
                             </textarea>
+
+                            <InputError class="mt-2" :message="form.errors.email" />
 
                             <div class="border-b border-black/10 pb-12"></div>
 
@@ -78,6 +86,7 @@
 
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import InputLabel from '@/Components/InputLabel.vue';
+    import InputError from '@/Components/InputError.vue';
     import TextInput from '@/Components/TextInput.vue';
     import { Head, useForm } from '@inertiajs/vue3';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
