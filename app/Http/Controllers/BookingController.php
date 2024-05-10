@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookingRequest;
 use App\Mail\BookingConfirmation;
 use App\Models\User;
 use Inertia\Inertia;
@@ -48,7 +49,7 @@ class BookingController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreBookingRequest $request)
     {
         // return $request->all();
 
