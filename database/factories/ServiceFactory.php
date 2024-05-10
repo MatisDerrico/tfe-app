@@ -28,6 +28,7 @@ class ServiceFactory extends Factory
             'price' => fake()->randomNumber(2),
             'duration' => fake()->randomNumber(2),
             'description' =>fake()->sentence(10),
+            'employee_id' => 0
         ];
     }
 

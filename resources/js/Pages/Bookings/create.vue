@@ -129,6 +129,9 @@
                                         value="Interlocuteur"
                                     />
                                     <select v-model="service.employee_id">
+                                        <option value="0">
+                                            Sans préférence
+                                        </option>
                                         <option
                                             v-for="employee in props.employees"
                                             :key="employee.id"
