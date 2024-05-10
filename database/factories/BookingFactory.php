@@ -23,7 +23,8 @@ class BookingFactory extends Factory
             // 'user_id' => User::all()->random()->id,
             'date' => Carbon::now(), // Méthode qui renvoit la date du jour
             'name' => fake()->name,
-            'email' => fake()->email
+            'email' => fake()->email,
+            'price' => 100
         ];
     }
 }

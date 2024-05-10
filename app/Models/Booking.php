@@ -9,6 +9,8 @@ class Booking extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'created_at' => 'datetime:d/m/Y - h:i',
     ];

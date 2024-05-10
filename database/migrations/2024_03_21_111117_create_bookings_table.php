@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->dateTime('date');
+            $table->integer('price');
+            $table->time('time');
             $table->timestamps(); // Updated et created at géré par laravel par défaut
         });
     }

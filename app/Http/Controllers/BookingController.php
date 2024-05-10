@@ -14,7 +14,7 @@ class BookingController extends Controller
 {
     public function index()
     {
-        /** 
+        /**
          * Permet de charger le contenu de la table booking en incluant les données du model user associé
          * Grâce à la relation défini dans le model booking
          */
@@ -48,6 +48,26 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        return $request->all();
+        // return $request->all();
+        
+        // Etape 1 : création de la réservation
+
+        $booking = Booking::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'price' => $request->price,
+            'date' => $request->date,
+            'time' => $request->time,
+        ]);
+
+        // Etape 2 : Lien entre réservation et services et employés
+        foreach($request->servicesChoosen as $service) {
+            DB::table('booking_service')->insert([
+                'booking_id' => $booking->id,
+                'service_id' => $service['id'],
+                'employee_id' => $service['employee_id']
+            ]);
+        }
+        return 'ok';
     }
 }

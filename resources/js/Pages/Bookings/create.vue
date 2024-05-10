@@ -82,6 +82,25 @@
                             <p class="font-bold">{{ service.price }} €</p>
                         </div>
 
+                        <div class="my-4 flex justify-between">
+
+                            <div>
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="Jour"
+                                />
+                                <input type="date" v-model="form.date">
+                            </div>
+
+                            <div>
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="Heure"
+                                />
+                                <input type="time" v-model="form.time">
+                            </div>
+                        </div>
+
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
@@ -158,6 +177,8 @@ const form = useForm({
     email: "",
     servicesChoosen: [],
     price: 0,
+    date: "",
+    time: "",
 });
 
 const filteredServices = ref([]);
@@ -201,6 +222,6 @@ const removeService = (serviceId) => {
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.post("/admin/services");
+    form.post("/bookings");
 };
 </script>
