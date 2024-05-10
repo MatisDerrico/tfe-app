@@ -171,7 +171,7 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref } from "vue";
 
@@ -225,6 +225,8 @@ const removeService = (serviceId) => {
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.post("/bookings");
+    form.post("/bookings",{
+        onFinish: () => router.get('/booking/confirmation'),
+    } );
 };
 </script>

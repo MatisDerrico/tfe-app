@@ -49,7 +49,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         // return $request->all();
-        
+
         // Etape 1 : création de la réservation
 
         $booking = Booking::create([
@@ -68,6 +68,10 @@ class BookingController extends Controller
                 'employee_id' => $service['employee_id']
             ]);
         }
-        return 'ok';
+    }
+
+    public function confirmation()
+    {
+        return Inertia::render('Bookings/confirmation');
     }
 }

@@ -57,10 +57,12 @@ Route::middleware('auth','isEmployee')->group(function () {
 
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 Route::post('bookings', [BookingController::class, 'store'])->name('booking.store');
+Route::get('booking/confirmation', [BookingController::class, 'confirmation'])->name('booking.confirmation');
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/gallerie', GallerieController::class);
 Route::get('/staff', StaffController::class);
 Route::get('/contact', ContactController::class);
+
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
