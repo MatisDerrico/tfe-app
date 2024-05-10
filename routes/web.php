@@ -3,11 +3,13 @@
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmployeeBookingController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GallerieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\StaffController;
 use App\Models\Booking;
 use App\Models\Employee;
 use Illuminate\Foundation\Application;
@@ -56,6 +58,8 @@ Route::middleware('auth','isEmployee')->group(function () {
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/gallerie', GallerieController::class);
+Route::get('/staff', StaffController::class);
+Route::get('/contact', ContactController::class);
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');

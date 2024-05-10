@@ -1,6 +1,6 @@
 <template>
      <div class="mx-auto max-w-7xl overflow-hidden px-6 mt-12 lg:px-8">
-      <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
+      <nav class="-mb-6 columns-2 flex justify-center space-x-4 lg:space-x-12" aria-label="Footer">
         <div v-for="item in navigation.main" :key="item.name" class="pb-6">
           <a :href="item.href" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</a>
         </div>
@@ -17,7 +17,7 @@
             <p class="mt-10 text-center leading-5 text-gray-500">Les Conditions d'utilisation</p>
         </div>
     </div>
-    <div class="flex my-8">
+    <div class="flex justify-center my-8">
         <Link
                     :href="route('login')"
                     class="font-semibold text-xs text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
