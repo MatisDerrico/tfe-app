@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmation;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Booking;
@@ -9,6 +10,7 @@ use App\Models\Service;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -68,6 +70,9 @@ class BookingController extends Controller
                 'employee_id' => $service['employee_id']
             ]);
         }
+
+        // Etape 3 : envoi du mail de confirmation
+        Mail::to($request->email)->send(new BookingConfirmation());
     }
 
     public function confirmation()
