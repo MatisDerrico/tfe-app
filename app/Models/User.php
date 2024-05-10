@@ -47,6 +47,12 @@ class User extends Authenticatable
         return $this->hasMany(Booking::class);
     }
 
+    // Un service peut être réalisé par différents employés.
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }
 
 

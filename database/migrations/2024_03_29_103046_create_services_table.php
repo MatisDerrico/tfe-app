@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('duration');
             $table->text('description');
-
+            $table->integer('employee_id')->nullable();
         });
     }
 

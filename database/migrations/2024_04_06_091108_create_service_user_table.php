@@ -11,19 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booking_service', function (Blueprint $table) {
-            $table->id();
-            $table->integer('booking_id');
+        Schema::create('service_user', function (Blueprint $table) {
+            $table->integer('user_id');
             $table->integer('service_id');
-            $table->integer('employee_id')->nullable();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        //
     }
 };

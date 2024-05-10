@@ -43,4 +43,24 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    // Create user with employee role
+    public function employee(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_employee' => true,
+            ];
+        });
+    }
+
+    // Create user with admin role
+    public function admin(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_admin' => true,
+            ];
+        });
+    }
 }

@@ -22,8 +22,8 @@ class Service extends Model
 
      // Un employé peut réalisé plusieurs services
 
-     public function employee()
+     public function users()
      {
-         return $this->belongsToMany(Employee::class);
+         return $this->belongsToMany(User::class);
      }
 }

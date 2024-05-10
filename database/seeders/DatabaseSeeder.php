@@ -16,35 +16,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Création d'un utilisateur avec un compte admin
-        User::factory()->create([
+        // Création d'un utilisateur avec un compte admin et employé
+        User::factory()
+        ->admin()
+        ->employee()
+        ->create([
             'email' => 'matispgm@hotmail.com',
             'name' => 'Matis',
-            'is_admin' => true
          ]);
 
-         User::factory()->create([
+         User::factory()
+         ->admin()
+         ->create([
             'email' => 'adminIfosup@hotmail.com',
             'name' => 'adminIfosup',
-            'is_admin' => true
          ]);
 
-        // Création de services de coiffure avec un employé attitré pour chaque service
+        // Création de services de coiffure avec 2 employés attitrés pour chaque service
         $barberServices = Service::factory()
             ->barber()
             ->count(2)
-            ->has(Employee::factory()->barber())
+            ->has(User::factory()->employee())
             ->state(new Sequence(
                 ['name' => 'Bigoudis'],
                 ['name' => 'Lissage californien'],
             ))
             ->create();
 
-        // Création de services de tatouage avec un employé attitré pour chaque service
+        // Création de services de tatouage avec 2 employés attitrés pour chaque service
         $tatooServices = Service::factory()
             ->tatoo()
             ->count(2)
-            ->has(Employee::factory()->tatoo())
+            ->has(User::factory()->employee())
             ->state(new Sequence(
                 ['name' => 'Tribal'],
                 ['name' => 'Mahori'],
