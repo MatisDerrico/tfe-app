@@ -20,7 +20,10 @@
                                 v-model="form.name"
                             />
 
-                            <InputError class="mt-2" :message="form.errors.name" />
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.name"
+                            />
                         </div>
 
                         <div class="my-4">
@@ -35,7 +38,10 @@
                                 v-model="form.email"
                             />
 
-                            <InputError class="mt-2" :message="form.errors.email" />
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.email"
+                            />
                         </div>
 
                         <h2 class="my-4 text-center">
@@ -87,15 +93,17 @@
                         </div>
 
                         <div class="my-4 flex justify-between">
-
                             <div>
                                 <InputLabel
                                     class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                                     value="Jour"
                                 />
-                                <input type="date" v-model="form.date">
+                                <input type="date" v-model="form.date" />
 
-                                <InputError class="mt-2" :message="form.errors.date" />
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.date"
+                                />
                             </div>
 
                             <div>
@@ -103,9 +111,12 @@
                                     class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                                     value="Heure"
                                 />
-                                <input type="time" v-model="form.time">
+                                <input type="time" v-model="form.time" />
 
-                                <InputError class="mt-2" :message="form.errors.time" />
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.time"
+                                />
                             </div>
                         </div>
 
@@ -158,6 +169,11 @@
                                 >
                             </p>
                         </div>
+                        
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.servicesChoosen"
+                        />
 
                         <div class="border-b border-black/10 pb-12"></div>
 
@@ -199,7 +215,7 @@ const chooseYourType = ref();
 
 const props = defineProps({
     services: Array,
-    employees: Array
+    employees: Array,
 });
 
 const filterServices = (type) => {
@@ -234,11 +250,8 @@ const removeService = (serviceId) => {
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    if(!form.errors){
-        form.post("/bookings",{
-        onFinish: () => router.get('/booking/confirmation'),
-        } );
-    }
-
+    form.post("/bookings", {
+        onFinish: () => router.get("/booking/confirmation"),
+    });
 };
 </script>

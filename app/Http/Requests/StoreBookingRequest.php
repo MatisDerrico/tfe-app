@@ -22,13 +22,23 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> 'required|min:6',
+            'name'=> 'required',
             'price'=> 'required|integer|numeric',
             'time'=> 'required',
             'date' => 'required',
             'email' => 'required',
+            'servicesChoosen' => 'required',
         ];
     }
 
-    
+    public function messages()
+    {
+        return [
+            'name.required' => 'Veuillez saisir votre nom',
+            'email.required' => 'Veuillez saisir une adresse mail',
+            'time.required' => 'Veuillez préciser une heure',
+            'date.required' => 'Veuillez préciser le jour',
+            'servicesChoosen.required' => "Veuillez choisir un service minimum"
+        ];
+    }
 }

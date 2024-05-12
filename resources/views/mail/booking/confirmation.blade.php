@@ -1,7 +1,7 @@
 <x-mail::message>
 Merci pour votre réservation, nous vous assurons que tout sera prêt lorsque vous arriverez.
 
-<x-mail::button :url="'/services'">
+<x-mail::button :url="route('booking.create')">
 Consultez le site
 </x-mail::button>
 
