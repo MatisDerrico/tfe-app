@@ -211,7 +211,6 @@ const form = useForm({
 
 const filteredServices = ref([]);
 
-const chooseYourType = ref();
 
 const props = defineProps({
     services: Array,
@@ -219,7 +218,7 @@ const props = defineProps({
 });
 
 const filterServices = (type) => {
-    chooseYourType.value = type;
+
 
     const filter = props.services.filter((item) => {
         return item.type === type;

@@ -22,7 +22,7 @@ class BookingController extends Controller
          * Grâce à la relation défini dans le model booking
          */
         $bookings = Booking::with(['services'])->get();
-        
+
         //  dd($bookings);
 
         return Inertia::render('Bookings/index', [
@@ -43,7 +43,6 @@ class BookingController extends Controller
 
     public function store(StoreBookingRequest $request)
     {
-        // return $request->all();
 
         // Etape 1 : création de la réservation
 
