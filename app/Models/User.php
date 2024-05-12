@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'employee_type',
     ];
 
     /**
@@ -48,11 +49,8 @@ class User extends Authenticatable
     }
 
     // Un service peut être réalisé par différents employés.
-
     public function services()
     {
         return $this->belongsToMany(Service::class);
     }
 }
-
-

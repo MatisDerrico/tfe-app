@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use App\Models\Service;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Service;
+use App\Models\Employee;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function index ()
     {
-        // Récupération des connections avec les données des utilisateurs
-        $employees = Employee::with('services')->get();
+        // Récupération des utilisateurs de type employé avec leurs services associés
+        $employees = User::where('is_employee', true)->with('services')->get();
 
         return Inertia::render('Employees/index', [
             'employees' => $employees,
@@ -29,10 +30,14 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        // return $request->all();
+
         // Création d'employés
-        $employe = Employee::create([
+        $employe = User::create([
             'name' => $request->name,
-            'type' => $request->type
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'employee_type' => $request->type,
         ]);
 
         // Association des services à cet employé
