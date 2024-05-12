@@ -13,7 +13,9 @@
             </DisclosureButton>
           </div>
           <div class="flex align-items flex-shrink-0 items-center">
-            <img class="h-28 w-auto" src="/logo1.png" alt="Your Company" />
+            <a href="/">
+                <img class="h-28 w-auto" src="/logo1.png" alt="Your Company" />
+            </a>
           </div>
           <div class="hidden md:ml-6 md:flex md:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
