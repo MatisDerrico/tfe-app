@@ -17,7 +17,7 @@
                 <img class="h-28 w-auto" src="/logo1.png" alt="Your Company" />
             </a>
           </div>
-          <div class="hidden md:ml-6 md:flex md:space-x-8">
+          <div class="hidden md:ml-2 md:flex md:space-x-4 lg:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
             <a href="/" class="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-white">Accueil</a>
             <a href="services" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Nos services</a>
