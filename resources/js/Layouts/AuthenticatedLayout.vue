@@ -27,14 +27,11 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Tableau de bord
-                                </NavLink>
                                 <NavLink :href="route('serviceAdmin.index')" :active="route().current('serviceAdmin.index')">
                                     Services
                                 </NavLink>
                                 <NavLink :href="route('booking.index')" :active="route().current('booking.index')">
-                                    Réservations
+                                    Réservations 
                                 </NavLink>
                                 <NavLink :href="route('employee.index')" :active="route().current('employee.index')">
                                     Employées
@@ -52,8 +49,6 @@ const showingNavigationDropdown = ref(false);
                                                 type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                <!-- {{ $page.props.auth.user.name }} -->
-
                                                 <svg
                                                     class="ms-2 -me-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"

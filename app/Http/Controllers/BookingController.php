@@ -21,7 +21,7 @@ class BookingController extends Controller
          * Permet de charger le contenu de la table booking en incluant les données du model user associé
          * Grâce à la relation défini dans le model booking
          */
-        $bookings = Booking::with(['user','services'])->get();
+        $bookings = Booking::with(['services'])->get();
         
         //  dd($bookings);
 
@@ -70,10 +70,15 @@ class BookingController extends Controller
         return to_route('booking.confirmation');
     }
 
-
-
     public function confirmation()
     {
         return Inertia::render('Bookings/confirmation');
+    }
+
+    public function destroy(Booking $booking)
+    {
+        $booking->delete();
+
+        return to_route('booking.index');
     }
 }

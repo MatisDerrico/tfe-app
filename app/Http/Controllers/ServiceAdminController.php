@@ -36,5 +36,32 @@ class ServiceAdminController extends Controller
         ]);
     }
 
+    public function edit(Service $service)
+    {
+        return Inertia::render('ServicesAdmin/edit', [
+            'service' => $service,
+        ]);
+    }
+
+    public function update(Service $service, Request $request)
+    {
+        $service->update([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'description'=>$request->description,
+            'duration'=>$request->duration,
+            'type'=>$request->type
+        ]);
+
+        return to_route('serviceAdmin.index');
+    }
+
+    public function destroy(Service $service)
+    {
+        $service->delete();
+
+        return to_route('serviceAdmin.index');
+    }
+
 
 }

@@ -64,9 +64,13 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
+    Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name('booking.destroy');
     Route::get('/services/create', [ServiceAdminController::class, 'create'])->name('service.create');
     Route::get('/services', [ServiceAdminController::class, 'index'])->name('serviceAdmin.index');
     Route::post('/services', [ServiceAdminController::class, 'store'])->name('service.store');
+    Route::delete('/services/{service}', [ServiceAdminController::class, 'destroy'])->name('service.destroy');
+    Route::get('/services/{service}/edit', [ServiceAdminController::class, 'edit'])->name('service.edit');
+    Route::put('/services/{service}', [ServiceAdminController::class, 'update'])->name('service.update');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employee.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employee.store');
@@ -76,8 +80,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
 });
 
 Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function () {
-    Route::get('/bookings', [EmployeeBookingController::class, 'index'])->name('booking.index');
+    Route::get('/bookings', [EmployeeBookingController::class, 'index'])->name('EmployeeBooking.index');
 });
-
 
 require __DIR__.'/auth.php';
