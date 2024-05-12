@@ -21,9 +21,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                    />
+                                    <img src="/logoblack.png" alt="" class="h-20 w-auto">
                                 </Link>
                             </div>
 
@@ -32,7 +30,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Tableau de bord
                                 </NavLink>
-                                <NavLink :href="route('service.index')" :active="route().current('service.index')">
+                                <NavLink :href="route('serviceAdmin.index')" :active="route().current('serviceAdmin.index')">
                                     Services
                                 </NavLink>
                                 <NavLink :href="route('booking.index')" :active="route().current('booking.index')">

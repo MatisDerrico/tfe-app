@@ -73,6 +73,20 @@
                             :message="form.errors.duration"
                         />
 
+                        <div>
+                            <InputLabel
+                                    class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="type"
+                                />
+
+                                <select name="" class="" v-model="form.type">
+                                    <option value="Coiffure">Coiffure</option>
+                                    <option value="Tatouage">Tatouage</option>
+                                </select>
+
+                                <InputError class="mt-2" :message="form.errors.type" />
+                        </div>
+
                         <InputLabel
                             class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
                             value="description"
@@ -115,6 +129,7 @@ const form = useForm({
     price: "",
     description: "",
     duration: "",
+    type: "",
 });
 
 // Lancement d'une requête POST avec les données de l'objet form

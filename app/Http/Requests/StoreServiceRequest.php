@@ -26,6 +26,7 @@ class StoreServiceRequest extends FormRequest
             'price'=> 'required|integer|numeric',
             'description'=> 'required',
             'duration'=> 'required',
+            'type'=> 'required',
         ];
     }
 
@@ -35,6 +36,7 @@ class StoreServiceRequest extends FormRequest
             'name.required'=> 'Veuillez saisir un nom de service',
             'name.min'=> 'Veuillez saisir un nom de 6 caractères minimum',
             'price.required'=> 'Veuillez saisir un prix',
+            'type.required'=> 'Veuillez saisir un type',
         ];
     }
 }
