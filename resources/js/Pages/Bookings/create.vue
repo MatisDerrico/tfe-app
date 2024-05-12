@@ -4,8 +4,18 @@
     <GuestLayout>
         <div class="py-4">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-2">
+                <div class="w-full flex justify-center">
+                    <a href="/">
+                        <img
+                            class="h-48 w-auto"
+                            src="/logoblack.png"
+                            alt="Your Company"
+                        />
+                    </a>
+                </div>
+
                 <div
-                    class="bg-white overflow-hidden shadow-sm p-6 sm:rounded-lg"
+                    class="overflow-hidden shadow-sm p-6 sm:rounded-lg"
                 >
                     <form @submit.prevent="submit" class="flex flex-col">
                         <div class="">
@@ -211,15 +221,12 @@ const form = useForm({
 
 const filteredServices = ref([]);
 
-
 const props = defineProps({
     services: Array,
     employees: Array,
 });
 
 const filterServices = (type) => {
-
-
     const filter = props.services.filter((item) => {
         return item.type === type;
     });

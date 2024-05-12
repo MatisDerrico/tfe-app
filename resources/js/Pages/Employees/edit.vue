@@ -89,7 +89,7 @@ import { router } from '@inertiajs/vue3'
 
 onMounted( () => {
     form.name = props.employee.name;
-    form.type = props.employee.type;
+    form.type = props.employee.employee_type;
     form.services =  props.providedServices;
 })
 

@@ -233,8 +233,8 @@ const features = [
                     vous accueille dans un espace exclusivement masculin pour
                     prendre soin de vous et vous chouchouter chers messieurs.
                 </p>
-                <button type="button" class="rounded-md mt-4 bg-zinc-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400">
-                    RÉSERVER
+                <button type="button" class="rounded-md mt-4 bg-zinc-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"><a href="/booking/create">Réserver</a>
+
                 </button>
             </div>
         </div>
