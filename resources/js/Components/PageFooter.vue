@@ -1,13 +1,13 @@
 <template>
-    <div class="mx-auto max-w-7xl overflow-hidden px-6 mt-12 lg:px-8">
+    <div class="flex flex-col items-center max-w-7xl overflow-hidden px-6 mt-12 lg:px-8">
         <nav
-            class="-mb-6 columns-2 flex justify-center space-x-4 lg:space-x-12"
+            class="grid grid-cols-2 sm:space-x-12 sm:flex"
             aria-label="Footer"
         >
             <div v-for="item in navigation.main" :key="item.name" class="pb-6">
                 <a
                     :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                    class="text-lg leading-6 text-gray-600 hover:text-gray-900"
                     >{{ item.name }}</a
                 >
             </div>

@@ -196,18 +196,14 @@ const features = [
                     "
                 />
             </div>
-            <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                <!-- <div class="mx-auto max-w-2xl lg:mx-0">
-        <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Support center</h2>
-        <p class="mt-6 text-lg leading-8 text-gray-300">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
-      </div> -->
+            <div class="flex justify-center w-full px-6 lg:px-8">
                 <div
                     class="absolute bottom-4 mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"
                 >
                     <div
                         v-for="card in cards"
                         :key="card.name"
-                        class="flex items-center justify-center gap-x-4 rounded-xl bg-white/5 p-6 ring-1 ring-inset ring-white/10"
+                        class="flex items-center justify-center gap-x-4 rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
                     >
                         <component
                             :is="card.icon"
@@ -224,7 +220,7 @@ const features = [
             </div>
         </div>
 
-        <div class="px-6 py-8 sm:py-16 lg:px-8">
+        <div class="px-6 py-2 sm:py-16 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
                 <img src="/logo1.png" alt="logo" class="h-[250px] mx-auto" />
                 <h2
@@ -245,7 +241,7 @@ const features = [
 
         <div>
             <div
-                class="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8"
+                class="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8"
             >
                 <div
                     class="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2"
@@ -316,7 +312,7 @@ const features = [
         </div>
 
         <div
-            class="mx-auto mt-6 w-full h-auto sm:h-[600px] sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"
+            class="mx-auto mt-6 w-full h-auto sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"
         >
             <div
                 class="hidden lg:block w-full h-full"
@@ -331,7 +327,7 @@ const features = [
             <div
                 class="sm:flex sm:flex-col sm:items-center lg:flex lg:flex-col lg:justify-between"
             >
-                <div class="sm:overflow-hidden sm:rounded-lg mb-6">
+                <div class="px-4 lg:px-0 sm:rounded-lg mb-6">
                     <img
                         src="/manon5.jpg"
                         alt="Manon1"
@@ -339,7 +335,7 @@ const features = [
                     />
                 </div>
 
-                <div class="sm:overflow-hidden sm:rounded-lg">
+                <div class="px-4 lg:px-0 sm:rounded-lg">
                     <img
                         src="/manon7.jpg"
                         alt="Manon1"

@@ -51,7 +51,7 @@
     </div>
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-3xl lg:mx-0">
-            <h2 class="text-4xl font-bold tracking-tight text-white mb-4 sm:text-6xl">Découvrez nos prestations</h2>
+            <h2 class="text-3xl font-bold tracking-tight text-white mb-4 sm:text-4xl">Découvrez nos prestations</h2>
             <button type="button" class="relative inline-flex items-center gap-x-1.5 rounded-md bg-zinc-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 <a href="/services">
                     Cartes des services

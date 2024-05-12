@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('index')">
                                     <img src="/logoblack.png" alt="" class="h-20 w-auto">
                                 </Link>
                             </div>
@@ -31,7 +31,7 @@ const showingNavigationDropdown = ref(false);
                                     Services
                                 </NavLink>
                                 <NavLink :href="route('booking.index')" :active="route().current('booking.index')">
-                                    Réservations 
+                                    Réservations
                                 </NavLink>
                                 <NavLink :href="route('employee.index')" :active="route().current('employee.index')">
                                     Employées
