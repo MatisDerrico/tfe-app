@@ -169,7 +169,7 @@
                                 >
                             </p>
                         </div>
-                        
+
                         <InputError
                             class="mt-2"
                             :message="form.errors.servicesChoosen"
@@ -250,8 +250,6 @@ const removeService = (serviceId) => {
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.post("/bookings", {
-        onFinish: () => router.get("/booking/confirmation"),
-    });
+    form.post("/bookings");
 };
 </script>
