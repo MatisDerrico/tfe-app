@@ -22,11 +22,22 @@ class StoreContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'prenom'=> 'required|min:6',
-            'nom'=> 'required|integer|numeric',
+            'prenom'=> 'required',
+            'nom'=> 'required',
             'email'=> 'required',
             'phone'=> 'required',
             'message'=> 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'prenom.required'=> 'Veuillez saisir un prénom',
+            'nom.min'=> 'Veuillez saisir un nom',
+            'email.required'=> 'Veuillez saisir une adresse mail correcte',
+            'phone.required'=> 'Veuillez saisir un numéro de téléphone correct',
+            'message.required'=> 'Veuillez saisir votre message',
         ];
     }
 }

@@ -58,7 +58,8 @@ Route::get('booking/confirmation', [BookingController::class, 'confirmation'])->
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/gallerie', GallerieController::class);
 Route::get('/staff', StaffController::class);
-Route::get('/contact', ContactController::class);
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {

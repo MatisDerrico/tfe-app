@@ -34,7 +34,7 @@
                 <div>
                     <InputLabel
                     class="block text-sm font-semibold leading-6 text-white"
-                    value="prenom"
+                    value="Prénom"
                     />
                     <div class="mt-2.5">
                         <TextInput type="text" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -49,32 +49,69 @@
                         />
                 </div>
                 <div>
-                    <label for="last-name" class="block text-sm font-semibold leading-6 text-white">Nom</label>
+                    <InputLabel class="block text-sm font-semibold leading-6 text-white"
+                    value="Nom"
+                    />
+
                     <div class="mt-2.5">
-                    <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6" />
+                        <TextInput type="text" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6"
+                        v-model="form.nom"
+                        required
+                        />
                     </div>
+                    <InputError
+                       class="mt-2"
+                        :message="form.errors.prenom"
+                        />
+                </div>
+
+                <div class="sm:col-span-2">
+                    <InputLabel class="block text-sm font-semibold leading-6 text-white"
+                    value="Email"
+                    />
+
+                    <div class="mt-2.5">
+                    <TextInput type="text" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                        v-model="form.email"
+                        required
+                        />
+                    </div>
+                    <InputError
+                       class="mt-2"
+                        :message="form.errors.email"
+                        />
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="email" class="block text-sm font-semibold leading-6 text-white">Email</label>
+                    <InputLabel class="block text-sm font-semibold leading-6 text-white"
+                    value="Numéro de téléphone"
+                    />
                     <div class="mt-2.5">
-                    <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+                    <TextInput type="text" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                        v-model="form.phone"
+                        required
+                        />
                     </div>
+                    <InputError
+                       class="mt-2"
+                        :message="form.errors.email"
+                        />
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="phone" class="block text-sm font-semibold leading-6 text-white">Numéro de téléphone</label>
+                    <InputLabel class="block text-sm font-semibold leading-6 text-white"
+                    value="Votre message"
+                    />
+
                     <div class="mt-2.5">
-                    <input type="tel" name="phone" id="phone-number" autocomplete="tel" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="message" class="block text-sm font-semibold leading-6 text-white">Votre message</label>
-                    <div class="mt-2.5">
-                    <textarea name="message" id="message" rows="4" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+                    <textarea name="message" id="message" rows="4" class="block w-full rounded-md bg-black border border-white px-3.5 py-2 text-white shadow-sm ring-1 ring-inset focus:ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                    v-model="form.message"
+                        required>
+                    </textarea>
+
                     </div>
                 </div>
                 </div>
                 <div class="mt-8 flex justify-center">
-                <button type="submit" class="rounded-md bg-gray-400 px-8 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400">
+                <button @click="submit" type="submit" class="rounded-md bg-gray-400 px-8 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400">
                     Envoyez</button>
                 </div>
             </div>
@@ -92,6 +129,7 @@ import PageFooter from "@/Components/PageFooter.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { useForm } from '@inertiajs/vue3';
 
 
 const form = useForm({
@@ -101,4 +139,9 @@ const form = useForm({
     phone: "",
     message: "",
 });
+
+// Lancement d'une requête POST avec les données de l'objet form
+const submit = () => {
+    form.post("/contact");
+};
   </script>
