@@ -21,16 +21,8 @@ class BookingController extends Controller
          * Permet de charger le contenu de la table booking en incluant les données du model user associé
          * Grâce à la relation défini dans le model booking
          */
-        $bookings = Booking::with(['user','services.employee',])
-
-        /**
-         * Grâce à la méthode withcount, elle permet de compter l'ensemble des services liés à la réservation et le query->select qui est une fonction callback permet de calculer le total des services trouvés.
-        */
-
-        ->withCount(['services as total' => function($query){
-            $query->select(DB::raw('SUM(price)'));
-        }])
-        ->get();
+        $bookings = Booking::with(['user','services'])->get();
+        
         //  dd($bookings);
 
         return Inertia::render('Bookings/index', [
