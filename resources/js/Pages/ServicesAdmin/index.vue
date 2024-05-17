@@ -47,7 +47,7 @@
                                     scope="col"
                                     class="px-3 py-3.5 text-left text-sm font-semibold text-black"
                                 >
-                                    Réservation
+                                    Type
                                 </th>
                             </tr>
                         </thead>
@@ -71,7 +71,7 @@
                                 <td
                                     class="whitespace-nowrap px-3 py-4 text-sm text-black"
                                 >
-                                    {{ service.type }} €
+                                    {{ service.type }}
                                 </td>
                                 <td
                                     class="flex whitespace-nowrap px-3 py-4 text-sm text-gray-500"

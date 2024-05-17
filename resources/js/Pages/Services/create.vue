@@ -121,7 +121,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const form = useForm({
@@ -134,6 +134,10 @@ const form = useForm({
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.post("/admin/services");
+    form.post("/admin/services",
+    {
+        onFinish: () => router.get("/admin/services"),
+    }
+    );
 };
 </script>

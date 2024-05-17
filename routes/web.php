@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CguController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmployeeBookingController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GallerieController;
+use App\Http\Controllers\InformationLegalesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceAdminController;
 use App\Http\Controllers\ServiceController;
@@ -58,8 +60,11 @@ Route::get('booking/confirmation', [BookingController::class, 'confirmation'])->
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/gallerie', GallerieController::class);
 Route::get('/staff', StaffController::class);
+Route::get('/cgu', CguController::class)->name('cgu.index');
+Route::get('/informationlegales', InformationLegalesController::class)->name('cgu.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {

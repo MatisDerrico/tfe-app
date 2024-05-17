@@ -65,7 +65,7 @@
                                         v-for="service in booking.services"
                                         :key="service.id"
                                     >
-                                        {{ service.name }} - {{ service.name }}
+                                        {{ service.name }} - {{ service.price }} €
                                     </p>
                                 </td>
                                 <td

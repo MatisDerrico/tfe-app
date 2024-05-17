@@ -37,7 +37,6 @@
                                 v-model="form.type"
                                 name="type"
                                 @change="filterServices"
-                                disabled
                             >
                                 <option></option>
                                 <option>Coiffure</option>

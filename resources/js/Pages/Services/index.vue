@@ -125,23 +125,9 @@
                                 Réservez
                             </button>
                         </td>
-
-                        <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                           <p v-for="employee in booking.employees"> {{ employee.name }} </p>
-                        </td> -->
                         </tr>
                     </tbody>
                     </table>
-                <!-- <div v-for="service in services">
-                    <div>
-                        <h2>{{ service.name }}</h2>
-                        <p>{{ service.description }}</p>
-                    </div>
-
-                    <div>
-                        <p>{{ service.price }}</p>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

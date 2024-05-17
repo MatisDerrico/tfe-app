@@ -34,7 +34,7 @@ class StoreContactRequest extends FormRequest
     {
         return [
             'prenom.required'=> 'Veuillez saisir un prénom',
-            'nom.min'=> 'Veuillez saisir un nom',
+            'nom.required'=> 'Veuillez saisir un nom',
             'email.required'=> 'Veuillez saisir une adresse mail correcte',
             'phone.required'=> 'Veuillez saisir un numéro de téléphone correct',
             'message.required'=> 'Veuillez saisir votre message',

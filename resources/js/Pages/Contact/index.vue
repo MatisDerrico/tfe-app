@@ -61,7 +61,7 @@
                     </div>
                     <InputError
                        class="mt-2"
-                        :message="form.errors.prenom"
+                        :message="form.errors.nom"
                         />
                 </div>
 
@@ -93,7 +93,7 @@
                     </div>
                     <InputError
                        class="mt-2"
-                        :message="form.errors.email"
+                        :message="form.errors.phone"
                         />
                 </div>
                 <div class="sm:col-span-2">
