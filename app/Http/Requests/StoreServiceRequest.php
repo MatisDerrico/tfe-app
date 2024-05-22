@@ -24,7 +24,6 @@ class StoreServiceRequest extends FormRequest
         return [
             'name'=> 'required|min:6',
             'price'=> 'required|integer|numeric',
-            'description'=> 'required',
             'duration'=> 'required',
             'type'=> 'required',
         ];

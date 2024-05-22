@@ -24,29 +24,16 @@
             </a>
         </div>
         <div class="flex justify-center gap-4">
-            <p class="mt-10 text-center leading-5 text-gray-500">&copy; 2024</p>
-            <a href="/informationlegales">
-                <p class="mt-10 text-center leading-5 text-gray-500">
-                Informations légales
-            </p>
-            </a>
-            <a href="/cgu">
-                <p class="mt-10 text-center leading-5 text-gray-500">
-                Les Conditions d'utilisation
-            </p>
-            </a>
+            <div class="mt-10 text-gray-500">
+                &copy; 2024
+            </div>
+                <div class="mt-10">
+                    <LegalModal />
+                </div>
 
-            <div>
-    <!-- Autres éléments de votre Footer -->
-
-    <!-- Bouton ou lien pour ouvrir le modal des informations légales -->
-    <button @click="openLegalModal" class="text-gray-500 hover:text-gray-900">
-      Informations légales
-    </button>
-
-    <!-- Composant Modal -->
-    <LegalModal v-if="isLegalModalOpen" @close="closeLegalModal" />
-  </div>
+                <div class="mt-10">
+                    <CguModal />
+                </div>
 
         </div>
     </div>
@@ -61,19 +48,9 @@
 
 <script setup>
 import LegalModal from './LegalModal.vue';
-import { ref } from 'vue';
-
-const isLegalModalOpen = ref(false);
-
-const openLegalModal = () => {
-  isLegalModalOpen.value = true;
-};
-
-const closeLegalModal = () => {
-  isLegalModalOpen.value = false;
-};
 import { Link } from "@inertiajs/vue3";
 import { defineComponent, h } from "vue";
+import CguModal from './CguModal.vue';
 
 const navigation = {
     main: [

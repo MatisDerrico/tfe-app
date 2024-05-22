@@ -27,6 +27,7 @@ class ServiceAdminController extends Controller
     // $request c'est la variable qui va contenir une instance de la classe Request
     public function store(StoreServiceRequest $request)
     {
+        // dd($request->all());
         Service::create([
             'name'=>$request->name,
             'price'=>$request->price,

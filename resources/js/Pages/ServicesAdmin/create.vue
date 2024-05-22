@@ -98,8 +98,6 @@
                         >
                         </textarea>
 
-                        <InputError class="mt-2" :message="form.errors.email" />
-
                         <div class="border-b border-black/10 pb-12"></div>
 
                         <PrimaryButton

@@ -123,6 +123,23 @@ const features = [
             "« Mlle D’Errico », Un Petit Bout de « Femme Barbier » au Poil !",
     },
 ];
+
+const featuresTatoo = [
+  {
+    name: 'Retrouvez notre tatoueur "Artistique D" aux doigts qui "piiiiiiic"…',
+    description:
+      "Dani, âgé de 37 ans, tatoue depuis l'âge de 14 ans, transformant sa passion en une carrière de plus de deux décennies. Il adore la fantaisie et les couleurs, laissant libre cours à son esprit créatif pour offrir des œuvres uniques. Son parcours, marqué par une soif d'apprendre et une grande capacité artistique, lui permet de maîtriser divers styles tout en restant fidèle à son univers distinctif. Aujourd'hui, il déploie son talent dans un nouvel espace équipé du meilleur matériel.",
+    imageSrc: '/tatoo2.jpg',
+    imageAlt: 'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
+  },
+  {
+    name: 'Envie de se faire tatouer ?',
+    description:
+      "Venez discuter de vos idées avec Artistique D et découvrir son approche artistique unique. Comme il aime dire : Je ne travaille pas, je crée. Prenez rendez-vous depuis notre site ou Contactez nous pour toute information.",
+    imageSrc: '/tatoo1.jpg',
+    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.',
+  },
+]
 </script>
 
 <template>
@@ -348,6 +365,27 @@ const features = [
                 <img src="/manon9.jpg" alt="Manon1" class="h-full w-full" />
             </div>
         </div>
+
+
+        <div class="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">A propos du Tatoo Shop !</h2>
+      </div>
+
+      <div class="mt-16 space-y-16">
+        <div v-for="(feature, featureIdx) in featuresTatoo" :key="feature.name" class="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-8">
+          <div :class="[featureIdx % 2 === 0 ? 'lg:col-start-1' : 'lg:col-start-8 xl:col-start-9', 'mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-4']">
+            <h3 class="text-lg font-medium text-white">{{ feature.name }}</h3>
+            <p class="mt-2 text-sm text-gray-400">{{ feature.description }}</p>
+          </div>
+          <div :class="[featureIdx % 2 === 0 ? 'lg:col-start-6 xl:col-start-5' : 'lg:col-start-1', 'flex-auto lg:col-span-7 lg:row-start-1 xl:col-span-8']">
+            <div class="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg bg-gray-100">
+              <img :src="feature.imageSrc" :alt="feature.imageAlt" class="object-cover object-center" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
         <PageFooter />
 
