@@ -101,7 +101,9 @@
     <div class="bg-black py-12">
         <h2 class="mb-10 text-center font-semibold text-xl text-white leading-tight">Carte des services</h2>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-black overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-black my-8" v-for="(serviceType, index) in services">
+                    <h3 class="text-gray-300 font-bold text-2xl mb-4">{{ serviceType[0].type }}</h3>
                 <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-black">
                         <tr>
@@ -112,22 +114,26 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-black">
-                        <tr v-for="service in services">
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-white">{{ service.name }}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-white">
-                            {{ service.description }}
-                        </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-white">
-                            {{ service.price }} €
-                        </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
-                                Réservez
-                            </button>
-                        </td>
-                        </tr>
+
+
+                            <tr v-for="service in serviceType">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-white">{{ service.name }}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-white">
+                                {{ service.description }}
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-white">
+                                {{ service.price }} €
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
+                                    Réservez
+                                </button>
+                            </td>
+                            </tr>
+
                     </tbody>
                     </table>
+                </div>
             </div>
         </div>
     </div>

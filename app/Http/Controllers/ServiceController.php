@@ -11,7 +11,9 @@ class ServiceController extends Controller
 {
     public function index()
     {
-         $services = Service::all();
+         $services = Service::all()->groupBy('type');
+
+        //  dd($services);
 
         return Inertia::render('Services/index', [
             'services' => $services,
