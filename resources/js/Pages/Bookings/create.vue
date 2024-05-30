@@ -60,7 +60,7 @@
 
                         <div class="flex justify-between">
                             <div
-                                @click="filterServices('Coiffure')"
+                                @click="filterServicesAndEmployees('Coiffure')"
                                 class="border border-gray-300 rounded-lg p-4"
                             >
                                 <h2>Coiffure</h2>
@@ -71,7 +71,7 @@
                                 />
                             </div>
                             <div
-                                @click="filterServices('Tatouage')"
+                                @click="filterServicesAndEmployees('Tatouage')"
                                 class="border border-gray-300 rounded-lg p-4"
                             >
                                 <h2>Tatouage</h2>
@@ -102,7 +102,18 @@
                             <p class="font-bold">{{ service.price }} €</p>
                         </div>
 
-                        <div class="my-4 flex justify-between">
+
+
+                        <div
+                            class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
+                        >
+                            <div
+                                v-for="service in form.servicesChoosen"
+                                :key="service.id"
+                                class="flex justify-between mx-4 my-4"
+                            >
+                                <div class="flex flex-col w-full">
+                                    <div class="my-4 flex justify-between">
                             <div>
                                 <InputLabel
                                     class="mb-1 block text-sm font-medium leading-6 text-gray-900"
@@ -129,16 +140,6 @@
                                 />
                             </div>
                         </div>
-
-                        <div
-                            class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
-                        >
-                            <div
-                                v-for="service in form.servicesChoosen"
-                                :key="service.id"
-                                class="flex justify-between mx-4 my-4"
-                            >
-                                <div class="flex flex-col w-full">
                                     <div class="flex justify-between">
                                         <div class="flex">
                                             <h2>{{ service.name }}</h2>
@@ -162,7 +163,7 @@
                                             Sans préférence
                                         </option>
                                         <option
-                                            v-for="employee in props.employees"
+                                            v-for="employee in filteredEmployees"
                                             :key="employee.id"
                                             :value="employee.id"
                                         >
@@ -207,7 +208,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import InputError from "@/Components/InputError.vue";
 
 const form = useForm({
@@ -220,19 +221,30 @@ const form = useForm({
 });
 
 const filteredServices = ref([]);
+const filteredEmployees = ref([]);
 
 const props = defineProps({
     services: Array,
     employees: Array,
 });
 
-const filterServices = (type) => {
+const filterServicesAndEmployees = (type) => {
     const filter = props.services.filter((item) => {
         return item.type === type;
     });
 
     filteredServices.value = filter;
+
+    filteredEmployees.value = props.employees.filter((item) => {
+        return item.employee_type === type;
+    });
 };
+
+
+
+onMounted(() => {
+  filteredEmployees.value = props.employees
+})
 
 // Calcul du prix total des services sélectionnés
 const calculateTotalPrice = () => {

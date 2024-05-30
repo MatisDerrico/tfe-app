@@ -155,9 +155,9 @@ const featuresTatoo = [
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
         >
             <img
-                src="/manon3.jpg"
+                src="/manon3copie.jpg"
                 alt=""
-                class="absolute inset-0 -z-10 h-full w-full object-cover object-top"
+                class="absolute inset-0 h-full w-full object-cover"
             />
             <div
                 class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
@@ -217,10 +217,16 @@ const featuresTatoo = [
                 <div
                     class="absolute bottom-4 mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"
                 >
-                    <div
+
+                </div>
+            </div>
+        </div>
+
+        <div class="flex w-full justify-between px-8 mt-8">
+            <div
                         v-for="card in cards"
                         :key="card.name"
-                        class="flex items-center justify-center gap-x-4 rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
+                        class="flex items-center justify-center gap-x-4 w-[400px] rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
                     >
                         <component
                             :is="card.icon"
@@ -233,10 +239,7 @@ const featuresTatoo = [
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
-
         <div class="px-6 py-2 sm:py-16 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
                 <img src="/logo1.png" alt="logo" class="h-[250px] mx-auto" />

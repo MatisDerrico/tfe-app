@@ -59,7 +59,9 @@ class BookingController extends Controller
             DB::table('booking_service')->insert([
                 'booking_id' => $booking->id,
                 'service_id' => $service['id'],
-                'employee_id' => $service['employee_id']
+                'employee_id' => $service['employee_id'],
+                'date' => $service['date'],
+                'time' => $service['time']
             ]);
         }
 

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('booking_id');
             $table->integer('service_id');
             $table->integer('employee_id')->nullable();
+            $table->dateTime('date');
+            $table->time('time');
         });
     }
 

@@ -31,7 +31,7 @@ class Booking extends Model
     // Une réservation est lié à plusieurs services
     public function services()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class)->withPivot('time', 'date');
     }
 
     // On fait appel à la relation services en lui incluant une méthode sum qui permettra de calculer le cout de tous les services
