@@ -119,7 +119,8 @@
                                     class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                                     value="Jour"
                                 />
-                                <input type="date" v-model="form.date" />
+
+                                <VDatePicker v-model="form.date" mode="date" />
 
                                 <InputError
                                     class="mt-2"
@@ -210,6 +211,7 @@ import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref, onMounted } from "vue";
 import InputError from "@/Components/InputError.vue";
+
 
 const form = useForm({
     name: "",
