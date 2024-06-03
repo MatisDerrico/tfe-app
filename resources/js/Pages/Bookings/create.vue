@@ -14,9 +14,7 @@
                     </a>
                 </div>
 
-                <div
-                    class="overflow-hidden shadow-sm p-6 sm:rounded-lg"
-                >
+                <div class="overflow-hidden shadow-sm p-6 sm:rounded-lg">
                     <form @submit.prevent="submit" class="flex flex-col">
                         <div class="">
                             <InputLabel
@@ -102,8 +100,6 @@
                             <p class="font-bold">{{ service.price }} €</p>
                         </div>
 
-
-
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
@@ -114,33 +110,41 @@
                             >
                                 <div class="flex flex-col w-full">
                                     <div class="my-4 flex justify-between">
-                            <div>
-                                <InputLabel
-                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                    value="Jour"
-                                />
+                                        <div>
+                                            <InputLabel
+                                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                                value="Jour"
+                                            />
 
-                                <VDatePicker v-model="form.date" mode="date" />
+                                            <VDatePicker
+                                                v-model="form.date"
+                                                mode="date"
+                                                :min-date='new Date()'
+                                                :disabled-dates="['2024-06-05']"
+                                            />
 
-                                <InputError
-                                    class="mt-2"
-                                    :message="form.errors.date"
-                                />
-                            </div>
+                                            <InputError
+                                                class="mt-2"
+                                                :message="form.errors.date"
+                                            />
+                                        </div>
 
-                            <div>
-                                <InputLabel
-                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                    value="Heure"
-                                />
-                                <input type="time" v-model="form.time" />
+                                        <div>
+                                            <InputLabel
+                                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                                value="Heure"
+                                            />
+                                            <input
+                                                type="time"
+                                                v-model="form.time"
+                                            />
 
-                                <InputError
-                                    class="mt-2"
-                                    :message="form.errors.time"
-                                />
-                            </div>
-                        </div>
+                                            <InputError
+                                                class="mt-2"
+                                                :message="form.errors.time"
+                                            />
+                                        </div>
+                                    </div>
                                     <div class="flex justify-between">
                                         <div class="flex">
                                             <h2>{{ service.name }}</h2>
@@ -212,7 +216,6 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref, onMounted } from "vue";
 import InputError from "@/Components/InputError.vue";
 
-
 const form = useForm({
     name: "",
     email: "",
@@ -242,11 +245,9 @@ const filterServicesAndEmployees = (type) => {
     });
 };
 
-
-
 onMounted(() => {
-  filteredEmployees.value = props.employees
-})
+    filteredEmployees.value = props.employees;
+});
 
 // Calcul du prix total des services sélectionnés
 const calculateTotalPrice = () => {

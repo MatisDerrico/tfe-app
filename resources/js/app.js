@@ -8,7 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import VCalendar from 'v-calendar';
 import 'v-calendar/style.css';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'mlle-derrico';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

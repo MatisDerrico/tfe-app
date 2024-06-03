@@ -1,7 +1,7 @@
 <template>
 
 
-<Head title="Dashboard" />
+<Head title="Nos services" />
 
 <div
         class="bg-black relative flex-col sm:flex sm:justify-center sm:items-center min-h-screen"

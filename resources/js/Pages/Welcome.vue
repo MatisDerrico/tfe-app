@@ -143,7 +143,7 @@ const featuresTatoo = [
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Accueil" />
 
     <div
         class="bg-black relative flex-col sm:flex sm:justify-center sm:items-center min-h-screen"
@@ -155,7 +155,7 @@ const featuresTatoo = [
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
         >
             <img
-                src="/manon3copie.jpg"
+                src="/photos/headerAccueil2.jpg"
                 alt=""
                 class="absolute inset-0 h-full w-full object-cover"
             />
@@ -222,11 +222,11 @@ const featuresTatoo = [
             </div>
         </div>
 
-        <div class="flex w-full justify-between px-8 mt-8">
+        <div class="flex flex-col w-full items-center px-8 mt-8 space-y-4 md:space-y-0 md:space-x-2 md:flex-row md:justify-between">
             <div
                         v-for="card in cards"
                         :key="card.name"
-                        class="flex items-center justify-center gap-x-4 w-[400px] rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
+                        class="flex items-center justify-center text-center gap-x-4 w-[400px] md:max-w-64 md:min-h-32 lg:min-h-24 lg:max-w-80 rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
                     >
                         <component
                             :is="card.icon"
@@ -299,7 +299,7 @@ const featuresTatoo = [
                             class="aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-gray-100"
                         >
                             <img
-                                src="/manon11.jpg"
+                                src="/manonAccueil.jpg"
                                 alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system."
                                 class="h-full w-full object-cover object-center"
                             />
