@@ -63,5 +63,7 @@ class DatabaseSeeder extends Seeder
         Booking::factory()
             ->hasAttached($barberServices,['date'=>'2024-06-05', 'time'=>'11:00'])
             ->create();
+
+            $this->call(employeeHolidaysSeeder::class);
     }
 }

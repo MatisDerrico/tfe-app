@@ -155,7 +155,7 @@ const featuresTatoo = [
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
         >
             <img
-                src="/photos/headerAccueil2.jpg"
+                src="/accueil/headerAccueil2.jpg"
                 alt=""
                 class="absolute inset-0 h-full w-full object-cover"
             />
@@ -226,7 +226,7 @@ const featuresTatoo = [
             <div
                         v-for="card in cards"
                         :key="card.name"
-                        class="flex items-center justify-center text-center gap-x-4 w-[400px] md:max-w-64 md:min-h-32 lg:min-h-24 lg:max-w-80 rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
+                        class="flex items-center justify-center text-center gap-x-4 w-[400px] md:max-w-64 md:min-h-32 lg:min-h-16 lg:max-w-96 rounded-xl bg-slate-800 p-6 ring-1 ring-inset ring-white/10"
                     >
                         <component
                             :is="card.icon"
@@ -240,7 +240,7 @@ const featuresTatoo = [
                         </div>
                     </div>
         </div>
-        <div class="px-6 py-2 sm:py-16 lg:px-8">
+        <div class="px-6 py-2 sm:py-8 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
                 <img src="/logo1.png" alt="logo" class="h-[250px] mx-auto" />
                 <h2
@@ -253,7 +253,7 @@ const featuresTatoo = [
                     vous accueille dans un espace exclusivement masculin pour
                     prendre soin de vous et vous chouchouter chers messieurs.
                 </p>
-                <button type="button" class="rounded-md mt-4 bg-zinc-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"><a href="/booking/create">Réserver</a>
+                <button type="button" class="rounded-md mt-6 bg-zinc-400 px-6 py-2.5 text-lg font-semibold text-white shadow-sm hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"><a href="/booking/create">Réserver</a>
 
                 </button>
             </div>
@@ -261,7 +261,7 @@ const featuresTatoo = [
 
         <div>
             <div
-                class="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8"
+                class="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-32 lg:py-16 lg:max-w-7xl lg:px-8"
             >
                 <div
                     class="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2"
@@ -299,7 +299,7 @@ const featuresTatoo = [
                             class="aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-gray-100"
                         >
                             <img
-                                src="/manonAccueil.jpg"
+                                src="/accueil/manonAccueil3.jpg"
                                 alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system."
                                 class="h-full w-full object-cover object-center"
                             />
@@ -311,7 +311,7 @@ const featuresTatoo = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="/manon13.jpg"
+                                    src="/accueil/manonAccueil2.jpg"
                                     alt="Detail of temperature setting button on kettle bass with digital degree readout."
                                     class="h-full w-full object-cover object-center"
                                 />
@@ -320,7 +320,7 @@ const featuresTatoo = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="/manon14.jpg"
+                                    src="/accueil/manonAccueil4.jpg"
                                     alt="Kettle spout pouring boiling water into coffee grounds in pour-over mug."
                                     class="h-full w-full object-cover object-center"
                                 />
