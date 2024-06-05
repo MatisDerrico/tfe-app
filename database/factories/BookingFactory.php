@@ -20,9 +20,6 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'user_id' => User::all()->random()->id,
-            'date' => Carbon::now(), // Méthode qui renvoit la date du jour
-            'time' => '10:00',
             'name' => fake()->name,
             'email' => fake()->email,
             'price' => 100,

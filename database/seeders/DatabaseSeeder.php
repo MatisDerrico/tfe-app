@@ -56,12 +56,12 @@ class DatabaseSeeder extends Seeder
 
         // Création d'une réservation avec des services de tatouage
         Booking::factory()
-            ->hasAttached($tatooServices)
+            ->hasAttached($tatooServices,['date'=>'2024-06-05', 'time'=>'11:00'])
             ->create();
 
         // Création d'une réservation avec des services de coiffure
         Booking::factory()
-            ->hasAttached($barberServices)
+            ->hasAttached($barberServices,['date'=>'2024-06-05', 'time'=>'11:00'])
             ->create();
     }
 }
