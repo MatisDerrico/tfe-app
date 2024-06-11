@@ -9,6 +9,9 @@ class Holiday extends Model
 {
     use HasFactory;
 
+    // pour ce model désactive la gestion des columns created_at, uptated_at
+    public $timestamps = false;
+
     protected $guarded = [];
 
     protected $table = 'employee_holidays';

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Holiday;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EmployeeHolidaysController extends Controller
 {
@@ -12,7 +14,12 @@ class EmployeeHolidaysController extends Controller
      */
     public function index()
     {
-        //
+
+        $holiday = Holiday::all();
+
+        return Inertia::render('EmployeeHoliday/index', [
+            'holiday' => $holiday,
+        ]);
     }
 
     /**
@@ -20,7 +27,7 @@ class EmployeeHolidaysController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('EmployeeHoliday/create');
     }
 
     /**
@@ -28,7 +35,11 @@ class EmployeeHolidaysController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Holiday::create([
+            'user_id'=>$request->user_id,
+            'date_debut'=>$request->date_debut,
+            'date_fin'=>$request->date_fin
+        ]);
     }
 
     /**
@@ -36,11 +47,10 @@ class EmployeeHolidaysController extends Controller
      */
     public function show(Request $request)
     {
-        $holidays = Holiday::where('user_id', $request->user_id)->get();
+        $holidays = Holiday::where('user_id', $request->user_id)->select('date_debut', 'date_fin')->get();
 
         return $holidays;
     }
-
     /**
      * Show the form for editing the specified resource.
      */

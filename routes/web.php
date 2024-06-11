@@ -6,15 +6,18 @@ use App\Http\Controllers\CguController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmployeeBookingController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeHolidaysController;
 use App\Http\Controllers\GallerieController;
 use App\Http\Controllers\InformationLegalesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceAdminController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StaffController;
+use App\Mail\BookingConfirmation;
 use App\Models\Booking;
 use App\Models\Employee;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -82,10 +85,18 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employees/{employe}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
     Route::put('/employees/{employe}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employees/{employe}/delete', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+    Route::get('/employeesHoliday', [EmployeeHolidaysController::class, 'index'])->name('employeeHoliday.index');
+    Route::get('/employeesHoliday/create', [EmployeeHolidaysController::class, 'create'])->name('employeeHoliday.create');
+    Route::post('/employeesHoliday', [EmployeeHolidaysController::class, 'store'])->name('employeeHoliday.store');
+    Route::get('/holidays/{user_id}', [EmployeeHolidaysController::class, 'show']);
 });
 
 Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [EmployeeBookingController::class, 'index'])->name('EmployeeBooking.index');
+});
+
+Route::get('/test_mail', function() {
+    Mail::to('mattou2812@gmail.com')->send(new BookingConfirmation());
 });
 
 require __DIR__.'/auth.php';
