@@ -155,7 +155,7 @@ const featuresTatoo = [
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
         >
             <img
-                src="/accueil/headerAccueil2.jpg"
+                src="/accueilimg/headerAccueil2.jpg"
                 alt=""
                 class="absolute inset-0 h-full w-full object-cover"
             />
@@ -299,7 +299,7 @@ const featuresTatoo = [
                             class="aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-gray-100"
                         >
                             <img
-                                src="/accueil/manonAccueil3.jpg"
+                                src="/accueilimg/manonAccueil3.jpg"
                                 alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system."
                                 class="h-full w-full object-cover object-center"
                             />
@@ -311,7 +311,7 @@ const featuresTatoo = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="/accueil/manonAccueil2.jpg"
+                                    src="/accueilimg/manonAccueil2.jpg"
                                     alt="Detail of temperature setting button on kettle bass with digital degree readout."
                                     class="h-full w-full object-cover object-center"
                                 />
@@ -320,7 +320,7 @@ const featuresTatoo = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="/accueil/manonAccueil4.jpg"
+                                    src="/accueilimg/manonAccueil4.jpg"
                                     alt="Kettle spout pouring boiling water into coffee grounds in pour-over mug."
                                     class="h-full w-full object-cover object-center"
                                 />
