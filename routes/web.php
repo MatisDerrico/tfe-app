@@ -96,7 +96,7 @@ Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function ()
 });
 
 Route::get('/test_mail', function() {
-    Mail::to('mattou2812@gmail.com')->send(new BookingConfirmation());
+    Mail::to('matisderrico@hotmail.com')->send(new BookingConfirmation());
 });
 
 require __DIR__.'/auth.php';
