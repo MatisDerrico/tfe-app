@@ -8,7 +8,7 @@
 
         <div class="my-4 flex justify-center">
             <PrimaryButton class="ms-4">
-                <a href="/admin/employees/create">
+                <a href="/admin/employeesHoliday/create">
                     Planifier des congés
                 </a>
             </PrimaryButton>
@@ -26,23 +26,23 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr v-for="employee in holiday" :key="employee.id">
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ employee.user_id }}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ employee.date_debut }}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ employee.date_fin }}</td>
+                            <tr v-for="holiday in holidays" :key="holiday.id">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ holiday.user.name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ holiday.date_debut }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ holiday.date_fin }}</td>
 
                                 <td class="flex justify-center items-center">
                                     <button
                                         class="flex px-2 py-4 text-sm bg-blue-200 rounded-lg border border-blue-400"
                                     >
                                         <img src="/img/editer.png" alt="edit" class="h-4 w-4 mr-2">
-                                        <a :href="`/admin/employees/${employee.id}/edit`">
+                                        <a :href="`/admin/employeesHoliday/${holiday.id}/edit`">
                                             Editer
                                         </a>
                                     </button>
                                     <button
                                         class="flex ml-4 px-2 py-4 text-sm bg-red-200 rounded-lg border border-red-400"
-                                        @click="deleteEmployee(employee)"
+                                        @click="deleteHoliday(holiday)"
                                     >
                                         <img src="/img/supprimer.png" alt="edit" class="h-4 w-4 mr-2">
                                         Supprimer
@@ -65,15 +65,15 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
-    holiday: Array,
+    holidays: Array,
 });
 
-const deleteEmployee = (employee) => {
-    router.delete("/admin/employees/" + employee.id + "/delete", {
+const deleteHoliday = (holiday) => {
+    router.delete("/admin/employeesHoliday/" + holiday.id + "/delete", {
         onBefore: () => {
-            return confirm('Etes vous sur de vouloir supprimer cet employé ?')
+            return confirm('Etes vous sur de vouloir supprimer ce congé ?')
         },
-        onFinish: () => router.get('/admin/employees'),
+        onFinish: () => router.get('/admin/employeesHoliday'),
     });
 }
 </script>

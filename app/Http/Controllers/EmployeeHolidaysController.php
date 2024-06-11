@@ -15,10 +15,11 @@ class EmployeeHolidaysController extends Controller
     public function index()
     {
 
-        $holiday = Holiday::all();
+        $holidays = Holiday::with('user')->get();
+
 
         return Inertia::render('EmployeeHoliday/index', [
-            'holiday' => $holiday,
+            'holidays' => $holidays,
         ]);
     }
 
@@ -27,7 +28,11 @@ class EmployeeHolidaysController extends Controller
      */
     public function create()
     {
-        return Inertia::render('EmployeeHoliday/create');
+        $employees = User::where('is_employee', true)->get();
+
+        return Inertia::render('EmployeeHoliday/create', [
+            'employees' => $employees
+        ]);
     }
 
     /**
@@ -36,7 +41,7 @@ class EmployeeHolidaysController extends Controller
     public function store(Request $request)
     {
         Holiday::create([
-            'user_id'=>$request->user_id,
+            'user_id'=>$request->employee_id,
             'date_debut'=>$request->date_debut,
             'date_fin'=>$request->date_fin
         ]);
@@ -70,8 +75,10 @@ class EmployeeHolidaysController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $holiday = Holiday::find($request->holiday);
+
+        $holiday->delete();
     }
 }

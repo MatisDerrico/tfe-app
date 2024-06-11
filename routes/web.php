@@ -89,6 +89,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employeesHoliday/create', [EmployeeHolidaysController::class, 'create'])->name('employeeHoliday.create');
     Route::post('/employeesHoliday', [EmployeeHolidaysController::class, 'store'])->name('employeeHoliday.store');
     Route::get('/holidays/{user_id}', [EmployeeHolidaysController::class, 'show']);
+    Route::delete('/employeesHoliday/{holiday}/delete', [EmployeeHolidaysController::class, 'destroy'])->name('employeesHoliday.destroy');
 });
 
 Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function () {

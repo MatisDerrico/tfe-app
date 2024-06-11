@@ -14,13 +14,24 @@
                     class="bg-white overflow-hidden shadow-sm p-6 sm:rounded-lg"
                 >
                     <form @submit.prevent="submit">
+
+                        <InputLabel
+                            class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                            value="Nom de l'employé"
+                        />
+
+                        <select v-model="form.employee_id" name="name" id="">
+                            <option v-for="employee in employees" :value="employee.id">{{ employee.name }}</option>
+                        </select>
+
+
                         <InputLabel
                             class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                             value="date_debut"
                         />
 
                         <TextInput
-                            type="text"
+                            type="date"
                             class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             placeholder="23/05/2024"
                             v-model="form.date_debut"
@@ -33,7 +44,7 @@
                         />
 
                         <TextInput
-                            type="text"
+                            type="date"
                             class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             placeholder="25/05/2024"
                             v-model="form.date_fin"
@@ -68,11 +79,13 @@ import { router } from "@inertiajs/vue3";
 const form = useForm({
     date_debut: "",
     date_fin: "",
+    employee_id:"",
 });
 
 
 const props = defineProps({
     holiday: Array,
+    employees: Array,
 });
 
 
