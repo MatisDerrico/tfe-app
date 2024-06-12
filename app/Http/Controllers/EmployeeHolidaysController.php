@@ -59,15 +59,23 @@ class EmployeeHolidaysController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+
+        $holidays = Holiday::where('user_id', $request->user_id)->get();
+
+        $employees = User::where('is_employee', true)->get();
+
+        return Inertia::render('EmployeeHoliday/edit',[
+            'holidays' => $holidays,
+            'employees' => $employees,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Holiday $holiday, Request $request)
     {
         //
     }
