@@ -62,12 +62,12 @@ class EmployeeHolidaysController extends Controller
     public function edit(Request $request)
     {
 
-        $holidays = Holiday::where('user_id', $request->user_id)->get();
+        $holiday = Holiday::find($request->holiday);
 
         $employees = User::where('is_employee', true)->get();
 
         return Inertia::render('EmployeeHoliday/edit',[
-            'holidays' => $holidays,
+            'holiday' => $holiday,
             'employees' => $employees,
         ]);
     }
@@ -77,7 +77,11 @@ class EmployeeHolidaysController extends Controller
      */
     public function update(Holiday $holiday, Request $request)
     {
-        //
+        $holiday->update([
+            'user_id'=>$request->user_id,
+            'date_debut'=>$request->date_debut,
+            'date_fin'=>$request->date_fin
+        ]);
     }
 
     /**
