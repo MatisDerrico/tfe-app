@@ -89,7 +89,8 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employeesHoliday/create', [EmployeeHolidaysController::class, 'create'])->name('employeeHoliday.create');
     Route::post('/employeesHoliday', [EmployeeHolidaysController::class, 'store'])->name('employeeHoliday.store');
     Route::get('/holidays/{user_id}', [EmployeeHolidaysController::class, 'show']);
-    Route::get('/employeesHoliday/{employe}/edit', [EmployeeHolidaysController::class, 'edit'])->name('employeesHoliday.edit');
+    Route::get('/employeesHoliday/{holiday}/edit', [EmployeeHolidaysController::class, 'edit'])->name('employeesHoliday.edit');
+    Route::put('/employeesHoliday/{holiday}', [EmployeeHolidaysController::class, 'update'])->name('employeesHoliday.update');
     Route::delete('/employeesHoliday/{holiday}/delete', [EmployeeHolidaysController::class, 'destroy'])->name('employeesHoliday.destroy');
 });
 

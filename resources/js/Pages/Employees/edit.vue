@@ -86,6 +86,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref, onMounted } from "vue";
 import { router } from '@inertiajs/vue3'
 
+// Récupération des valeurs existantes
 onMounted( () => {
     form.name = props.employee.name;
     form.type = props.employee.employee_type;

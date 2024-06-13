@@ -1,10 +1,10 @@
 <template>
-    <Head title="Edition employé" />
+    <Head title="Dashboard" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Mise à jour d'employé
+                Planification des congés
             </h2>
         </template>
 
@@ -14,62 +14,52 @@
                     class="bg-white overflow-hidden shadow-sm p-6 sm:rounded-lg"
                 >
                     <form @submit.prevent="submit">
-                        <div class="flex flex-col items-center">
-                            <InputLabel
-                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                value="Nom"
-                            />
 
-                            <TextInput
-                                type="text"
-                                class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                v-model="form.name"
-                                required
-                            />
+                        <InputLabel
+                            class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                            value="Nom de l'employé"
+                        />
 
-                            <InputLabel
-                                class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                value="Type de service"
-                            />
+                        <select v-model="form.user_id" name="name" id="">
+                            <option v-for="employee in employees" :value="employee.id">{{ employee.name }}</option>
+                        </select>
 
-                            <select
-                                class="my-4 rounded-lg"
-                                v-model="form.type"
-                                name="type"
-                                @change="filterServices"
-                            >
-                                <option></option>
-                                <option>Coiffure</option>
-                                <option>Tatouage</option>
-                            </select>
 
-                            <div
-                                class="mt-4"
-                                v-for="service in props.services"
-                                :key="service.id"
-                            >
-                                <input
-                                    type="checkbox"
-                                    class="rounded-lg"
-                                    :value="service.id"
-                                    v-model="form.services"
-                                />
+                        <InputLabel
+                            class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                            value="date_debut"
+                        />
 
-                                <label class="ml-2">
-                                    {{ service.name }}
-                                </label>
-                            </div>
+                        <TextInput
+                            type="date"
+                            class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            placeholder="23/05/2024"
+                            v-model="form.date_debut"
+                            required
+                        />
 
-                            <div class="border-b border-black/10 pb-12"></div>
+                        <InputLabel
+                            class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                            value="date_fin"
+                        />
 
-                            <PrimaryButton
-                                class="ms-4 mt-4"
-                                :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing"
-                            >
-                                Confirmez
-                            </PrimaryButton>
-                        </div>
+                        <TextInput
+                            type="date"
+                            class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            placeholder="25/05/2024"
+                            v-model="form.date_fin"
+                            required
+                        />
+
+                        <div class="border-b border-black/10 pb-12"></div>
+
+                        <PrimaryButton
+                            class="ms-4 mt-4"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
+                            Confirmez
+                        </PrimaryButton>
                     </form>
                 </div>
             </div>
@@ -84,33 +74,31 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref, onMounted } from "vue";
-import { router } from '@inertiajs/vue3'
+import { router } from "@inertiajs/vue3";
 
 onMounted( () => {
-    form.name = props.employee.name;
-    form.type = props.employee.employee_type;
-    form.services =  props.providedServices;
+    form.user_id = props.holiday.user_id;
+    form.date_debut = props.holiday.date_debut;
+    form.date_fin =  props.holiday.date_fin;
 })
 
 const form = useForm({
-    name: "",
-    type: "",
-    services: [],
+    date_debut: "",
+    date_fin: "",
+    user_id:"",
 });
 
-const filteredServices = ref([]);
 
-// Le nom employee correspond au nom donné dans la clé du tableau associatif envoyé en deuxième argument de la méthode edit.
 const props = defineProps({
-    employee: Object,
-    services: Array,
-    providedServices: Array,
+    holiday: Array,
+    employees: Array,
 });
 
-// Lancement d'une requête put avec les données de l'objet form
+
+// Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.put("/admin/employees/" + props.employee.id, {
-        onFinish: () => router.get('/admin/employees'),
+    form.put("/admin/employeesHoliday/"+props.holiday.id, {
+        onFinish: () => router.get("/admin/employeesHoliday"),
     });
 };
 </script>
