@@ -120,7 +120,7 @@
                                                 v-model="form.date"
                                                 mode="date"
                                                 :min-date='new Date()'
-                                                :disabled-dates="['2024-06-05']"
+                                                :disabled-dates="employeeHolidays"
                                             />
 
                                             <InputError
@@ -163,7 +163,7 @@
                                         class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
                                         value="Interlocuteur"
                                     />
-                                    <select v-model="service.employee_id">
+                                    <select v-model="employee_id" @change="getEmployeeAvailabilities">
                                         <option value="0">
                                             Sans préférence
                                         </option>
@@ -227,6 +227,8 @@ const form = useForm({
 
 const filteredServices = ref([]);
 const filteredEmployees = ref([]);
+const employee_id = ref(0);
+const employeeHolidays = ref([]);
 
 const props = defineProps({
     services: Array,
@@ -244,6 +246,19 @@ const filterServicesAndEmployees = (type) => {
         return item.employee_type === type;
     });
 };
+
+const getEmployeeAvailabilities = () => {
+    axios.get('/holidays/'+ employee_id.value).then(response => {
+        response.data.forEach(holiday => {
+            let holidayObject = {
+                start: holiday.date_debut, 
+                end: holiday.date_fin
+            }
+
+            employeeHolidays.value.push(holidayObject);
+        });
+    });
+}
 
 onMounted(() => {
     filteredEmployees.value = props.employees;

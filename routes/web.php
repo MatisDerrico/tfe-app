@@ -58,6 +58,7 @@ Route::middleware('auth','isEmployee')->group(function () {
 });
 
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
+Route::get('/holidays/{user_id}', [EmployeeHolidaysController::class, 'show']);
 Route::post('bookings', [BookingController::class, 'store'])->name('booking.store');
 Route::get('booking/confirmation', [BookingController::class, 'confirmation'])->name('booking.confirmation');
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
@@ -88,7 +89,6 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employeesHoliday', [EmployeeHolidaysController::class, 'index'])->name('employeeHoliday.index');
     Route::get('/employeesHoliday/create', [EmployeeHolidaysController::class, 'create'])->name('employeeHoliday.create');
     Route::post('/employeesHoliday', [EmployeeHolidaysController::class, 'store'])->name('employeeHoliday.store');
-    Route::get('/holidays/{user_id}', [EmployeeHolidaysController::class, 'show']);
     Route::get('/employeesHoliday/{holiday}/edit', [EmployeeHolidaysController::class, 'edit'])->name('employeesHoliday.edit');
     Route::put('/employeesHoliday/{holiday}', [EmployeeHolidaysController::class, 'update'])->name('employeesHoliday.update');
     Route::delete('/employeesHoliday/{holiday}/delete', [EmployeeHolidaysController::class, 'destroy'])->name('employeesHoliday.destroy');
