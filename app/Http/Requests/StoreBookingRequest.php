@@ -24,7 +24,8 @@ class StoreBookingRequest extends FormRequest
         return [
             'name'=> 'required',
             'price'=> 'required|integer|numeric',
-            'time'=> 'required',
+            'hour'=> 'required',
+            'minute'=> 'required',
             'date' => 'required',
             'email' => 'required',
             'servicesChoosen' => 'required',
@@ -36,7 +37,8 @@ class StoreBookingRequest extends FormRequest
         return [
             'name.required' => 'Veuillez saisir votre nom',
             'email.required' => 'Veuillez saisir une adresse mail',
-            'time.required' => 'Veuillez préciser une heure',
+            'hour.required' => 'Veuillez préciser une heure',
+            'minute.required' => 'Veuillez préciser les minutes',
             'date.required' => 'Veuillez préciser le jour',
             'servicesChoosen.required' => "Veuillez choisir un service minimum"
         ];

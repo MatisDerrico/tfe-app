@@ -103,6 +103,25 @@
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
+                            <InputLabel
+                                class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                value="Interlocuteur"
+                            />
+
+                            <select
+                                v-model="form.employee_id"
+                                @change="getEmployeeAvailabilities"
+                            >
+                                <option value="0">Sans préférence</option>
+                                <option
+                                    v-for="employee in filteredEmployees"
+                                    :key="employee.id"
+                                    :value="employee.id"
+                                >
+                                    {{ employee.name }}
+                                </option>
+                            </select>
+
                             <div
                                 v-for="service in form.servicesChoosen"
                                 :key="service.id"
@@ -117,10 +136,12 @@
                                             />
 
                                             <VDatePicker
-                                                v-model="form.date"
+                                                v-model.string="form.date"
                                                 mode="date"
-                                                :min-date='new Date()'
+                                                :min-date="new Date()"
                                                 :disabled-dates="employeeHolidays"
+                                                @dayclick="checkTime"
+                                                :masks="masks"
                                             />
 
                                             <InputError
@@ -134,14 +155,30 @@
                                                 class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                                                 value="Heure"
                                             />
-                                            <input
-                                                type="time"
-                                                v-model="form.time"
-                                            />
+
+                                            <select
+                                                v-model="form.hour"
+                                                id="hourSelect"
+                                            >
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                            </select>
+
+                                            <select v-model="form.minute">
+                                                <option value="00">00</option>
+                                                <option value="30">30</option>
+                                            </select>
 
                                             <InputError
                                                 class="mt-2"
-                                                :message="form.errors.time"
+                                                :message="form.errors.hour"
                                             />
                                         </div>
                                     </div>
@@ -159,22 +196,6 @@
                                             @click="removeService(service.id)"
                                         />
                                     </div>
-                                    <InputLabel
-                                        class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                        value="Interlocuteur"
-                                    />
-                                    <select v-model="employee_id" @change="getEmployeeAvailabilities">
-                                        <option value="0">
-                                            Sans préférence
-                                        </option>
-                                        <option
-                                            v-for="employee in filteredEmployees"
-                                            :key="employee.id"
-                                            :value="employee.id"
-                                        >
-                                            {{ employee.name }}
-                                        </option>
-                                    </select>
                                 </div>
                             </div>
 
@@ -222,7 +243,10 @@ const form = useForm({
     servicesChoosen: [],
     price: 0,
     date: "",
-    time: "",
+    // time: "",
+    hour: "00",
+    minute: "00",
+    employee_id : 0,
 });
 
 const filteredServices = ref([]);
@@ -234,6 +258,31 @@ const props = defineProps({
     services: Array,
     employees: Array,
 });
+
+const masks = ref({
+    modelValue: "YYYY-MM-DD",
+});
+
+const checkTime = () => {
+    axios
+        .get("/time/" + form.date + "/" + form.employee_id).then((response) => {
+            const hoursToRemove = response.data;
+
+            // Récupérer l'élément select
+            let hourSelect = document.getElementById("hourSelect");
+
+            // Parcourir les options et supprimer celles qui correspondent aux heures à supprimer
+            for (let i = hourSelect.options.length - 1; i >= 0; i--) {
+                const option = hourSelect.options[i];
+
+                if (hoursToRemove.includes(option.value)) {
+                    hourSelect.remove(i);
+                }
+
+                // console.log(hourSelect.options);
+            }
+        });
+};
 
 const filterServicesAndEmployees = (type) => {
     const filter = props.services.filter((item) => {
@@ -248,17 +297,19 @@ const filterServicesAndEmployees = (type) => {
 };
 
 const getEmployeeAvailabilities = () => {
-    axios.get('/holidays/'+ employee_id.value).then(response => {
-        response.data.forEach(holiday => {
+    axios.get("/holidays/" + employee_id.value).then((response) => {
+        employeeHolidays.value = [];
+
+        response.data.forEach((holiday) => {
             let holidayObject = {
-                start: holiday.date_debut, 
-                end: holiday.date_fin
-            }
+                start: holiday.date_debut,
+                end: holiday.date_fin,
+            };
 
             employeeHolidays.value.push(holidayObject);
         });
     });
-}
+};
 
 onMounted(() => {
     filteredEmployees.value = props.employees;

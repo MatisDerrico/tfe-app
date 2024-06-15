@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\AdminBookingController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\CguController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\EmployeeBookingController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\EmployeeHolidaysController;
-use App\Http\Controllers\GallerieController;
-use App\Http\Controllers\InformationLegalesController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ServiceAdminController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\StaffController;
-use App\Mail\BookingConfirmation;
+use Inertia\Inertia;
 use App\Models\Booking;
 use App\Models\Employee;
-use Illuminate\Foundation\Application;
+use App\Mail\BookingConfirmation;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\CguController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GallerieController;
+use App\Http\Controllers\TimeDisableController;
+use App\Http\Controllers\AdminBookingController;
+use App\Http\Controllers\ServiceAdminController;
+use App\Http\Controllers\EmployeeBookingController;
+use App\Http\Controllers\EmployeeHolidaysController;
+use App\Http\Controllers\InformationLegalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,7 @@ Route::middleware('auth','isEmployee')->group(function () {
 
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 Route::get('/holidays/{user_id}', [EmployeeHolidaysController::class, 'show']);
+Route::get('/time/{date}/{employee}', TimeDisableController::class);
 Route::post('bookings', [BookingController::class, 'store'])->name('booking.store');
 Route::get('booking/confirmation', [BookingController::class, 'confirmation'])->name('booking.confirmation');
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');

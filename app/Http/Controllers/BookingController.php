@@ -49,9 +49,7 @@ class BookingController extends Controller
         $booking = Booking::create([
             'name' => $request->name,
             'email' => $request->email,
-            'price' => $request->price,
-            'date' => $request->date,
-            'time' => $request->time,
+            'price' => $request->price
         ]);
 
         // Etape 2 : Lien entre réservation et services et employés
@@ -59,9 +57,9 @@ class BookingController extends Controller
             DB::table('booking_service')->insert([
                 'booking_id' => $booking->id,
                 'service_id' => $service['id'],
-                'employee_id' => $service['employee_id'],
-                'date' => $service['date'],
-                'time' => $service['time']
+                'employee_id' => $request->employee_id,
+                'date' => $request->date,
+                'time' => $request->hour . ":" . $request->minute
             ]);
         }
 
