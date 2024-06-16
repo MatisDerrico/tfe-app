@@ -14,12 +14,12 @@
         <ul role="list" class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             <li v-for="person in people" :key="person.name">
             <img class="aspect-[3/3] w-full rounded-2xl object-cover object-top" :src="person.src" alt="" />
-            <h3 class="mt-6 text-lg font-semibold leading-8 tracking-tight text-white">{{ person.name }}</h3>
-            <p class="text-base leading-7 text-gray-600">{{ person.role }}</p>
+            <h3 class="mt-6 text-xl font-semibold leading-8 tracking-tight text-white">{{ person.name }}</h3>
+            <p class="text-lg leading-7 text-gray-600">{{ person.role }}</p>
             <ul role="list" class="mt-6 flex gap-x-6">
                 <li>
-                <a :href="person.xUrl" class="text-gray-400 hover:text-gray-500">
-                    <span class="sr-only">X</span>
+                <a :href="person.facebookUrl" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Facebook</span>
                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
                     </svg>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="w-full relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-    <img src="galleriesection.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+    <img src="/imgSection/sectionImg.webp" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
     <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
       <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
     </div>
@@ -81,32 +81,32 @@ const people = [
     name: 'Manon',
     role: 'Coiffeuse, Barbière',
     src:
-      '/equipe/coiffeuse.jpg',
-    xUrl: '#',
+      '/imgEquipe/manon.webp',
+    facebookUrl: 'https://www.facebook.com/MlleDerrico',
     instagramUrl: 'https://www.instagram.com/mlle.derrico/',
   },
   {
     name: 'Cristian',
     role: 'Coiffeur, Barbier',
     src:
-      '/equipe/coiffeur.jpg',
-    xUrl: '#',
+      '/imgEquipe/cristian.webp',
+    facebookUrl: 'https://www.facebook.com/profile.php?id=100008955287072',
     instagramUrl: 'https://www.instagram.com/manncode94/',
   },
   {
     name: 'Dani',
     role: 'Tatoueur',
     src:
-      '/equipe/tatoueur.jpg',
-    xUrl: '#',
+      '/imgEquipe/dani.webp',
+    facebookUrl: 'https://www.facebook.com/artistique.bites',
     instagramUrl: 'https://www.instagram.com/artistiquedtattoos/',
   },
   {
     name: 'Andrea',
     role: 'Tatoueuse',
     src:
-      '/equipe/tatoueuse.jpg',
-    xUrl: '#',
+      '/imgEquipe/andrea.webp',
+    facebookUrl: 'https://www.facebook.com/kydok1',
     instagramUrl: 'https://www.instagram.com/a.n.d.r.e.e.a_0.8_/',
   },
 ]

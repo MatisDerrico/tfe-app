@@ -14,7 +14,7 @@
           </div>
           <div class="flex align-items flex-shrink-0 items-center">
             <a href="/">
-                <img class="h-28 w-auto" src="/logo1.png" alt="Your Company" />
+                <img class="h-28 w-auto" src="/logoWhite.png" alt="Your Company" />
             </a>
           </div>
           <div class="hidden md:ml-2 md:flex md:space-x-4 lg:space-x-8">

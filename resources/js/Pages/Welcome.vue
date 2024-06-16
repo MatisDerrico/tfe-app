@@ -129,14 +129,14 @@ const featuresTatoo = [
     name: 'Retrouvez notre tatoueur "Artistique D" aux doigts qui "piiiiiiic"…',
     description:
       "Dani, âgé de 37 ans, tatoue depuis l'âge de 14 ans, transformant sa passion en une carrière de plus de deux décennies. Il adore la fantaisie et les couleurs, laissant libre cours à son esprit créatif pour offrir des œuvres uniques. Son parcours, marqué par une soif d'apprendre et une grande capacité artistique, lui permet de maîtriser divers styles tout en restant fidèle à son univers distinctif. Aujourd'hui, il déploie son talent dans un nouvel espace équipé du meilleur matériel.",
-    imageSrc: '/tatoo2.jpg',
+    imageSrc: '/imgAccueil/accueilTatoo1.webp',
     imageAlt: 'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
   },
   {
     name: 'Envie de se faire tatouer ?',
     description:
       "Venez discuter de vos idées avec Artistique D et découvrir son approche artistique unique. Comme il aime dire : Je ne travaille pas, je crée. Prenez rendez-vous depuis notre site ou Contactez nous pour toute information.",
-    imageSrc: '/tatoo1.jpg',
+    imageSrc: '/imgAccueil/accueilTatoo2.webp',
     imageAlt: 'Detail of zipper pull with tan leather and silver rivet.',
   },
 ]
@@ -155,7 +155,7 @@ const featuresTatoo = [
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
         >
             <img
-                src="/accueilimg/headerAccueil2.jpg"
+                src="/imgHeader/headerAccueil.webp"
                 alt=""
                 class="absolute inset-0 h-full w-full object-cover"
             />
@@ -242,7 +242,7 @@ const featuresTatoo = [
         </div>
         <div class="px-6 py-2 sm:py-8 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
-                <img src="/logo1.png" alt="logo" class="h-[250px] mx-auto" />
+                <img src="/logoWhite.png" alt="logo" class="h-[250px] mx-auto" />
                 <h2
                     class="text-2xl font-bold tracking-tight text-white sm:text-4xl"
                 >
@@ -299,7 +299,7 @@ const featuresTatoo = [
                             class="aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-gray-100"
                         >
                             <img
-                                src="/accueilimg/manonAccueil3.jpg"
+                                src="/imgAccueil/accueil1.webp"
                                 alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system."
                                 class="h-full w-full object-cover object-center"
                             />
@@ -311,7 +311,7 @@ const featuresTatoo = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="/accueilimg/manonAccueil2.jpg"
+                                    src="/imgAccueil/accueil2.webp"
                                     alt="Detail of temperature setting button on kettle bass with digital degree readout."
                                     class="h-full w-full object-cover object-center"
                                 />
@@ -320,7 +320,7 @@ const featuresTatoo = [
                                 class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
                             >
                                 <img
-                                    src="/accueilimg/manonAccueil4.jpg"
+                                    src="/imgAccueil/accueil3.webp"
                                     alt="Kettle spout pouring boiling water into coffee grounds in pour-over mug."
                                     class="h-full w-full object-cover object-center"
                                 />
@@ -338,7 +338,7 @@ const featuresTatoo = [
                 class="hidden lg:block w-full h-full"
             >
                 <img
-                    src="/manon6.jpg"
+                    src="/imgAccueil/accueil4.webp"
                     alt="Manon1"
                     class="h-full"
                 />
@@ -349,7 +349,7 @@ const featuresTatoo = [
             >
                 <div class="px-4 lg:px-0 sm:rounded-lg mb-6">
                     <img
-                        src="/manon5.jpg"
+                        src="/imgAccueil/accueil5.webp"
                         alt="Manon1"
                         class="h-auto w-full object-cover object-center sm:object-cover sm:object-center"
                     />
@@ -357,7 +357,7 @@ const featuresTatoo = [
 
                 <div class="px-4 lg:px-0 sm:rounded-lg">
                     <img
-                        src="/manon7.jpg"
+                        src="/imgAccueil/accueil6.webp"
                         alt="Manon1"
                         class="h-auto w-full object-cover object-center sm:object-cover sm:object-center"
                     />
@@ -365,7 +365,7 @@ const featuresTatoo = [
             </div>
 
             <div class="hidden lg:block sm:overflow-hidden sm:rounded-lg">
-                <img src="/manon9.jpg" alt="Manon1" class="h-full w-full" />
+                <img src="/imgAccueil/accueil7.webp" alt="Manon1" class="h-full w-full" />
             </div>
         </div>
 

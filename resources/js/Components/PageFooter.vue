@@ -63,7 +63,7 @@ const navigation = {
     social: [
         {
             name: "Facebook",
-            href: "#",
+            href: "https://www.facebook.com/MlleDerrico",
             icon: defineComponent({
                 render: () =>
                     h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
@@ -77,7 +77,7 @@ const navigation = {
         },
         {
             name: "Instagram",
-            href: "#",
+            href: "https://www.instagram.com/mlle.derrico",
             icon: defineComponent({
                 render: () =>
                     h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
@@ -91,7 +91,7 @@ const navigation = {
         },
         {
             name: "YouTube",
-            href: "#",
+            href: "https://www.youtube.com/@manonderrico9621/featured",
             icon: defineComponent({
                 render: () =>
                     h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [

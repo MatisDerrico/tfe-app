@@ -10,52 +10,52 @@
 <div class="max-w-7xl py-12 px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
     <div class="grid gap-4">
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie2.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie1.webp" alt="">
         </div>
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/test.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie2.webp" alt="">
         </div>
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie12.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie10.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie5.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie7.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie3.webp" alt="">
         </div>
     </div>
     <div class="grid gap-4">
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie8.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie4.webp" alt="">
         </div>
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie10.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie5.webp" alt="">
         </div>
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie3.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie6.webp" alt="">
         </div>
     </div>
     <div class="grid gap-4">
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie4.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie7.webp" alt="">
         </div>
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie9.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie8.webp" alt="">
         </div>
         <div>
-            <img class="h-auto max-w-full rounded-lg" src="/photos/gallerie6.jpg" alt="">
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie9.webp" alt="">
+        </div>
+    </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie10.webp" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie11.webp" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="/imgGallerie/gallerie12.webp" alt="">
         </div>
     </div>
 </div>
 
 <div class="w-full relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-    <img src="galleriesection.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+    <img src="/imgSection/sectionImg.webp" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
     <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
       <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
     </div>
