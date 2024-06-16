@@ -54,7 +54,7 @@ import CguModal from './CguModal.vue';
 
 const navigation = {
     main: [
-        { name: "Accueil", href: "#" },
+        { name: "Accueil", href: "/" },
         { name: "Nos services", href: "/services" },
         { name: "Gallerie", href: "/gallerie" },
         { name: "Notre équipe", href: "/staff" },

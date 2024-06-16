@@ -128,7 +128,7 @@ const featuresTatoo = [
   {
     name: 'Retrouvez notre tatoueur "Artistique D" aux doigts qui "piiiiiiic"…',
     description:
-      "Dani, âgé de 37 ans, tatoue depuis l'âge de 14 ans, transformant sa passion en une carrière de plus de deux décennies. Il adore la fantaisie et les couleurs, laissant libre cours à son esprit créatif pour offrir des œuvres uniques. Son parcours, marqué par une soif d'apprendre et une grande capacité artistique, lui permet de maîtriser divers styles tout en restant fidèle à son univers distinctif. Aujourd'hui, il déploie son talent dans un nouvel espace équipé du meilleur matériel.",
+      "À 37 ans, Dani tatoue depuis ses 14 ans, transformant sa passion en une carrière de plus de deux décennies. Amoureux de la fantaisie et des couleurs, il laisse libre cours à sa créativité pour créer des œuvres uniques. Son parcours est marqué par une soif d'apprendre et une grande capacité artistique, lui permettant de maîtriser divers styles tout en restant fidèle à son univers distinctif. Aujourd'hui, il exprime son talent dans un nouvel espace équipé du meilleur matériel.",
     imageSrc: '/imgAccueil/accueilTatoo1.webp',
     imageAlt: 'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
   },
@@ -284,10 +284,10 @@ const featuresTatoo = [
                                 v-for="feature in features"
                                 :key="feature.name"
                             >
-                                <dt class="text-sm font-bold text-white">
+                                <dt class="text-lg font-bold text-white">
                                     {{ feature.name }}
                                 </dt>
-                                <dd class="mt-3 text-sm text-white">
+                                <dd class="mt-3 text-base text-white">
                                     {{ feature.description }}
                                 </dd>
                             </div>
@@ -379,7 +379,7 @@ const featuresTatoo = [
         <div v-for="(feature, featureIdx) in featuresTatoo" :key="feature.name" class="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-8">
           <div :class="[featureIdx % 2 === 0 ? 'lg:col-start-1' : 'lg:col-start-8 xl:col-start-9', 'mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-4']">
             <h3 class="text-lg font-medium text-white">{{ feature.name }}</h3>
-            <p class="mt-2 text-sm text-gray-400">{{ feature.description }}</p>
+            <p class="mt-2 text-base text-gray-400">{{ feature.description }}</p>
           </div>
           <div :class="[featureIdx % 2 === 0 ? 'lg:col-start-6 xl:col-start-5' : 'lg:col-start-1', 'flex-auto lg:col-span-7 lg:row-start-1 xl:col-span-8']">
             <div class="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg bg-gray-100">
