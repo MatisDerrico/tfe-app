@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
 class EmployeeBookingController extends Controller
 {
@@ -12,9 +13,10 @@ class EmployeeBookingController extends Controller
     {
         $employee = Auth::user(); // Récuperation des données de l'utilisateur connecté
 
-        $bookings = $employee->employeeBookings; // Récupération des réservations rattachées à cet employé
-
-        dd($bookings);
+         // Récupération des réservation avec les services associés
+        $bookings = Booking::withWhereHas('services', function($query) use ($employee){
+            return $query->where('booking_service.employee_id', $employee->id);
+        })->get();
 
         return Inertia::render('EmployeeBooking/index', [
             'bookings' => $bookings,

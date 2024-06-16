@@ -22,17 +22,6 @@ use App\Http\Controllers\EmployeeBookingController;
 use App\Http\Controllers\EmployeeHolidaysController;
 use App\Http\Controllers\InformationLegalesController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -45,12 +34,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware('auth')->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 // Pour accéder à la route Employe/bookings il faudra passé le middleware authentification et isEmployee
 Route::middleware('auth','isEmployee')->group(function () {
@@ -70,8 +53,6 @@ Route::get('/cgu', CguController::class)->name('cgu.index');
 Route::get('/informationlegales', InformationLegalesController::class)->name('cgu.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
@@ -94,6 +75,11 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/employeesHoliday/{holiday}/edit', [EmployeeHolidaysController::class, 'edit'])->name('employeesHoliday.edit');
     Route::put('/employeesHoliday/{holiday}', [EmployeeHolidaysController::class, 'update'])->name('employeesHoliday.update');
     Route::delete('/employeesHoliday/{holiday}/delete', [EmployeeHolidaysController::class, 'destroy'])->name('employeesHoliday.destroy');
+
+    // Routes de mises à jour du profil utilisateur
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function () {
