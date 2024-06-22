@@ -15,48 +15,57 @@
                 </div>
 
                 <div class="overflow-hidden shadow-sm p-6 sm:rounded-lg">
-                    <form @submit.prevent="submit" class="flex flex-col">
-                        <div class="">
-                            <InputLabel
-                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                value="nom complet"
-                            />
+                    <form @submit.prevent="submit" class="flex flex-col w-full">
+                        <div class="flex justify-center">
+                            <div class="w-full max-w-sm">
+                                    <InputLabel
+                                        class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                        value="nom complet"
+                                    />
+                                    <div class="relative">
+                                        <UserCircleIcon  class="absolute left-2 top-2 h-5 w-5 text-gray-500" aria-hidden="true" />
+                                        <TextInput
+                                            type="text"
+                                            class="block w-full pl-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            v-model="form.name"
+                                            placeholder="nom complet"
+                                        />
+                                    </div>
 
-                            <TextInput
-                                type="text"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                v-model="form.name"
-                            />
+                                    <InputError
+                                        class="mt-2"
+                                        :message="form.errors.name"
+                                    />
 
-                            <InputError
-                                class="mt-2"
-                                :message="form.errors.name"
-                            />
+
+                                <div class="my-4">
+                                    <InputLabel
+                                        class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                        value="email"
+                                    />
+                                    <div class="relative">
+                                        <EnvelopeIcon  class="absolute left-2 top-2 h-5 w-5 text-gray-500" aria-hidden="true" />
+                                        <TextInput
+                                            type="email"
+                                            class="block w-full pl-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            v-model="form.email"
+                                            placeholder="Votre adresse email"
+                                        />
+                                    </div>
+
+                                    <InputError
+                                        class="mt-2"
+                                        :message="form.errors.email"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="my-4">
-                            <InputLabel
-                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                value="email"
-                            />
-
-                            <TextInput
-                                type="email"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                v-model="form.email"
-                            />
-
-                            <InputError
-                                class="mt-2"
-                                :message="form.errors.email"
-                            />
-                        </div>
-
-                        <h2 class="my-4 text-center">
+                        <h2 class="my-12 text-center">
                             Choisissez le type de prestation
                         </h2>
 
-                        <div class="flex justify-between">
+                        <div class="flex justify-center space-x-4">
                             <div
                                 @click="filterServicesAndEmployees('Coiffure')"
                                 class="border border-gray-300 rounded-lg p-4"
@@ -81,6 +90,7 @@
                             </div>
                         </div>
 
+                        <div class="mx-auto">
                         <div
                             v-for="service in filteredServices"
                             :key="service.id"
@@ -99,7 +109,7 @@
                             </h2>
                             <p class="font-bold">{{ service.price }} €</p>
                         </div>
-
+                    </div>
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
@@ -214,13 +224,15 @@
 
                         <div class="border-b border-black/10 pb-12"></div>
 
-                        <PrimaryButton
-                            class="flex justify-center items-center ms-4 mt-4 w-28"
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                        >
-                            Confirmez
-                        </PrimaryButton>
+                        <div class="flex justify-center">
+                            <PrimaryButton
+                                class="flex justify-center items-center ms-4 mt-4 w-28"
+                                :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing"
+                            >
+                                Confirmez
+                            </PrimaryButton>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -236,6 +248,7 @@ import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref, onMounted } from "vue";
 import InputError from "@/Components/InputError.vue";
+import { EnvelopeIcon, UserCircleIcon } from "@heroicons/vue/24/outline";
 
 const form = useForm({
     name: "",

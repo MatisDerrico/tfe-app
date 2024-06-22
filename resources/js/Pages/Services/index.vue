@@ -100,7 +100,7 @@
 
     <div class="bg-black py-12 w-full sm:w-11/12">
         <h2 class="mb-10 text-center font-semibold text-2xl text-white leading-tight">Carte des services</h2>
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-6 lg:px-0">
             <div class="bg-black overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-black my-8" v-for="(serviceType, index) in services">
                     <h3 class="text-gray-300 font-bold text-2xl mb-4">{{ serviceType[0].type }}</h3>
