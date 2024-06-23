@@ -53,6 +53,7 @@ Route::get('/cgu', CguController::class)->name('cgu.index');
 Route::get('/informationlegales', InformationLegalesController::class)->name('cgu.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/booking/availability', [BookingController::class, 'availability']);
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');

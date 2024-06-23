@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('service_id');
             $table->integer('employee_id')->nullable();
             $table->dateTime('date');
-            $table->time('time');
+            $table->time('time'); // To do : A supprimer
         });
     }
 

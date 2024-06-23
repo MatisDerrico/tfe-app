@@ -18,25 +18,27 @@
                     <form @submit.prevent="submit" class="flex flex-col w-full">
                         <div class="flex justify-center">
                             <div class="w-full max-w-sm">
-                                    <InputLabel
-                                        class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                        value="nom complet"
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="nom complet"
+                                />
+                                <div class="relative">
+                                    <UserCircleIcon
+                                        class="absolute left-2 top-2 h-5 w-5 text-gray-500"
+                                        aria-hidden="true"
                                     />
-                                    <div class="relative">
-                                        <UserCircleIcon  class="absolute left-2 top-2 h-5 w-5 text-gray-500" aria-hidden="true" />
-                                        <TextInput
-                                            type="text"
-                                            class="block w-full pl-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            v-model="form.name"
-                                            placeholder="nom complet"
-                                        />
-                                    </div>
-
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.name"
+                                    <TextInput
+                                        type="text"
+                                        class="block w-full pl-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        v-model="form.name"
+                                        placeholder="nom complet"
                                     />
+                                </div>
 
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.name"
+                                />
 
                                 <div class="my-4">
                                     <InputLabel
@@ -44,7 +46,10 @@
                                         value="email"
                                     />
                                     <div class="relative">
-                                        <EnvelopeIcon  class="absolute left-2 top-2 h-5 w-5 text-gray-500" aria-hidden="true" />
+                                        <EnvelopeIcon
+                                            class="absolute left-2 top-2 h-5 w-5 text-gray-500"
+                                            aria-hidden="true"
+                                        />
                                         <TextInput
                                             type="email"
                                             class="block w-full pl-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -91,25 +96,25 @@
                         </div>
 
                         <div class="mx-auto">
-                        <div
-                            v-for="service in filteredServices"
-                            :key="service.id"
-                            class="flex my-4 items-center gap-2"
-                        >
-                            <input
-                                type="checkbox"
-                                class="rounded-full"
-                                v-model="form.servicesChoosen"
-                                :value="service"
-                                @change="calculateTotalPrice"
-                            />
+                            <div
+                                v-for="service in filteredServices"
+                                :key="service.id"
+                                class="flex my-4 items-center gap-2"
+                            >
+                                <input
+                                    type="checkbox"
+                                    class="rounded-full"
+                                    v-model="form.servicesChoosen"
+                                    :value="service"
+                                    @change="calculateTotalPrice"
+                                />
 
-                            <h2>
-                                {{ service.name }}
-                            </h2>
-                            <p class="font-bold">{{ service.price }} €</p>
+                                <h2>
+                                    {{ service.name }}
+                                </h2>
+                                <p class="font-bold">{{ service.price }} €</p>
+                            </div>
                         </div>
-                    </div>
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
@@ -149,7 +154,9 @@
                                                 v-model.string="form.date"
                                                 mode="date"
                                                 :min-date="new Date()"
-                                                :disabled-dates="employeeHolidays"
+                                                :disabled-dates="
+                                                    employeeHolidays
+                                                "
                                                 @dayclick="checkTime"
                                                 :masks="masks"
                                             />
@@ -246,7 +253,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import InputError from "@/Components/InputError.vue";
 import { EnvelopeIcon, UserCircleIcon } from "@heroicons/vue/24/outline";
 
@@ -255,11 +262,11 @@ const form = useForm({
     email: "",
     servicesChoosen: [],
     price: 0,
-    date: "",
+    date: new Date(),
     // time: "",
     hour: "00",
     minute: "00",
-    employee_id : 0,
+    employee_id: 0,
 });
 
 const filteredServices = ref([]);
@@ -277,8 +284,10 @@ const masks = ref({
 });
 
 const checkTime = () => {
+    fetch(`/booking/availability?date=${form.date.toISOString().split('T')[0]}&employee_id=${employee_id.value}`)
     axios
-        .get("/time/" + form.date + "/" + form.employee_id).then((response) => {
+        .get("/time/" + form.date + "/" + form.employee_id)
+        .then((response) => {
             const hoursToRemove = response.data;
 
             // Récupérer l'élément select
@@ -309,7 +318,8 @@ const filterServicesAndEmployees = (type) => {
     });
 };
 
-const getEmployeeAvailabilities = () => {
+const getEmployeeAvailabilities = () => { // to do : rename
+    fetch(`/booking/availability?date=${form.date.toISOString().split('T')[0]}&employee_id=${employee_id.value}`);
     axios.get("/holidays/" + employee_id.value).then((response) => {
         employeeHolidays.value = [];
 
@@ -347,6 +357,7 @@ const removeService = (serviceId) => {
 
     calculateTotalPrice();
 };
+
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
