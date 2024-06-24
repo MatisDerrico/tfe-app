@@ -125,7 +125,7 @@
 
                             <select
                                 v-model="form.employee_id"
-                                @change="getEmployeeAvailabilities"
+                                @change="onChangeEmployee"
                             >
                                 <option value="0">Sans préférence</option>
                                 <option
@@ -140,11 +140,11 @@
                             <div
                                 v-for="service in form.servicesChoosen"
                                 :key="service.id"
-                                class="flex justify-between mx-4 my-4"
+                                class="flex mx-4 my-4"
                             >
                                 <div class="flex flex-col w-full">
-                                    <div class="my-4 flex justify-between">
-                                        <div>
+                                    <div class="flex">
+                                        <div class="w-auto">
                                             <InputLabel
                                                 class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                                                 value="Jour"
@@ -157,7 +157,7 @@
                                                 :disabled-dates="
                                                     employeeHolidays
                                                 "
-                                                @dayclick="checkTime"
+                                                @dayclick="checkDate"
                                                 :masks="masks"
                                             />
 
@@ -167,31 +167,79 @@
                                             />
                                         </div>
 
-                                        <div>
+                                        <div class="w-1/2">
                                             <InputLabel
                                                 class="mb-1 block text-sm font-medium leading-6 text-gray-900"
                                                 value="Heure"
                                             />
 
-                                            <select
-                                                v-model="form.hour"
-                                                id="hourSelect"
+                                            <div
+                                                v-for="time in Object.keys(
+                                                    slotsWithoutPreferences
+                                                )"
+                                                class="flex justify-center"
                                             >
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                            </select>
+                                                <span
+                                                    @click="
+                                                        selectSlot(
+                                                            slotsWithoutPreferences,
+                                                            service,
+                                                            presentFullTime(
+                                                                time
+                                                            ),
+                                                            slotsWithoutPreferences[
+                                                                time
+                                                            ][0]
+                                                        )
+                                                    "
+                                                    :class="`w-1/2 px-1 mb-1 ${
+                                                        service.isActive ===
+                                                        presentFullTime(time)
+                                                            ? 'bg-gray-200'
+                                                            : 'bg-white'
+                                                    }`"
+                                                    >{{
+                                                        presentTime(time)
+                                                    }}</span
+                                                >
+                                            </div>
 
-                                            <select v-model="form.minute">
-                                                <option value="00">00</option>
-                                                <option value="30">30</option>
-                                            </select>
+                                            <template
+                                                v-if="
+                                                    form.employee_id !== 0 &&
+                                                    form.employee_id !== '0' &&
+                                                    currentEmployeeSlots
+                                                "
+                                            >
+                                                <div
+                                                    v-for="time in currentEmployeeSlots"
+                                                    class="flex justify-center"
+                                                >
+                                                    <span
+                                                        @click="
+                                                            selectSlot(
+                                                                {},
+                                                                service,
+                                                                presentFullTime(
+                                                                    time
+                                                                ),
+                                                                form.employee_id
+                                                            )
+                                                        "
+                                                        :class="`w-1/2 px-1 mb-1 ${
+                                                            service.isActive ===
+                                                            presentFullTime(
+                                                                time
+                                                            )
+                                                                ? 'bg-gray-200'
+                                                                : 'bg-white'
+                                                        }`"
+                                                        >{{
+                                                            presentTime(time)
+                                                        }}</span
+                                                    >
+                                                </div>
+                                            </template>
 
                                             <InputError
                                                 class="mt-2"
@@ -262,16 +310,20 @@ const form = useForm({
     email: "",
     servicesChoosen: [],
     price: 0,
-    date: new Date(),
+    date: formatDate(new Date()),
+    bookingDate: undefined,
     // time: "",
     hour: "00",
     minute: "00",
     employee_id: 0,
 });
 
+getFreeSlots(form.date, form.employee_id);
+
 const filteredServices = ref([]);
 const filteredEmployees = ref([]);
-const employee_id = ref(0);
+const slotsWithoutPreferences = ref({});
+const currentEmployeeSlots = ref(undefined);
 const employeeHolidays = ref([]);
 
 const props = defineProps({
@@ -283,9 +335,74 @@ const masks = ref({
     modelValue: "YYYY-MM-DD",
 });
 
-const checkTime = () => {
-    fetch(`/booking/availability?date=${form.date.toISOString().split('T')[0]}&employee_id=${employee_id.value}`)
-    axios
+function selectSlot(freeSlots, service, time, employeeId) {
+    service.isActive = false;
+    // TODO: Use freeSlots and service.duration to check ifwe are really able to selectthe choosed slot
+    form.bookingDate = `${form.date} ${time}:00`;
+    form.employee_id = employeeId;
+    service.isActive = time;
+    console.log("form.bookingDate", form.bookingDate);
+    console.log("employeeId", employeeId);
+}
+
+function zeroBourage(number) {
+    const string = String(number);
+
+    if (string.length === 1) {
+        return `0${string}`;
+    }
+    return string;
+}
+
+function presentTime(time) {
+    const hours = Number.parseFloat(time);
+    const integerPart = Math.floor(hours);
+    const fractionalPart = hours - integerPart;
+
+    return `${integerPart}:${zeroBourage(60 * fractionalPart)}`; // ex: "8:30"
+}
+
+function presentFullTime(time) {
+    const hours = Number.parseFloat(time);
+    const integerPart = Math.floor(hours);
+    const fractionalPart = hours - integerPart;
+
+    return `${zeroBourage(integerPart)}:${zeroBourage(60 * fractionalPart)}`; // ex: "8:30"
+}
+
+function formatDate(date) {
+    return date.toISOString().split("T")[0];
+}
+
+function getFreeSlots(date, employeeId) {
+    console.log("date", date, form.employee_id);
+
+    /*if (!date) {
+        console.log("no date bruh");
+        return;
+    }*/
+
+    // const date = formatDate(datetime);
+    fetch(`/booking/availability?date=${date}&employee_id=${employeeId}`)
+        .then((response) => response.json())
+        .then((data) => {
+            slotsWithoutPreferences.value = {};
+            currentEmployeeSlots.value = [];
+
+            console.log("data", data);
+            if (form.employee_id === 0 || form.employee_id === "0") {
+                slotsWithoutPreferences.value = data;
+            } else {
+                currentEmployeeSlots.value = data;
+            }
+        })
+        .catch((error) => console.error(error));
+}
+
+const checkDate = () => {
+    getFreeSlots(form.date, form.employee_id);
+
+    /*    axios
         .get("/time/" + form.date + "/" + form.employee_id)
         .then((response) => {
             const hoursToRemove = response.data;
@@ -303,7 +420,7 @@ const checkTime = () => {
 
                 // console.log(hourSelect.options);
             }
-        });
+        });*/
 };
 
 const filterServicesAndEmployees = (type) => {
@@ -318,9 +435,10 @@ const filterServicesAndEmployees = (type) => {
     });
 };
 
-const getEmployeeAvailabilities = () => { // to do : rename
-    fetch(`/booking/availability?date=${form.date.toISOString().split('T')[0]}&employee_id=${employee_id.value}`);
-    axios.get("/holidays/" + employee_id.value).then((response) => {
+const onChangeEmployee = () => {
+    getFreeSlots(form.date, form.employee_id);
+
+    axios.get("/holidays/" + form.employee_id).then((response) => {
         employeeHolidays.value = [];
 
         response.data.forEach((holiday) => {
@@ -357,7 +475,6 @@ const removeService = (serviceId) => {
 
     calculateTotalPrice();
 };
-
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {

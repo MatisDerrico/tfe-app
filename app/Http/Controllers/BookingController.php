@@ -60,7 +60,8 @@ class BookingController extends Controller
                 'booking_id' => $booking->id,
                 'service_id' => $service['id'],
                 'employee_id' => $request->employee_id,
-                'date' => $request->date . ' ' . $request->hour . ":" . $request->minute,
+                // 'date' => $request->date . ' ' . $request->hour . ":" . $request->minute,
+                'date' => $request->bookingDate,
                 'time' => $request->hour . ":" . $request->minute
             ]);
         }
@@ -83,14 +84,41 @@ class BookingController extends Controller
         return to_route('booking.index');
     }
 
-    public function availability(Request $request)
-    {
-        $slotDuration = 0.5; // heure
-        $openHourOffice = 10;
-        $closeHourOffice = 18.5;
+    public function getAvailabilityWithoutPreference($date){
+        $users = User::where('is_employee', 1)->get();
 
-        $date = $request->input('date');
-        $employee_id = $request->input('employee_id');
+        /**
+         * {
+         *   //heure,emplyee ids
+         *   "10": [1,2,3]
+         *   "10.5": [1,2,3]
+         *   "11": [1,2,3]
+         * }
+         */
+        $freeSlots = [];
+
+        foreach($users as $user){
+            $occupedSlots = $this->getOccupedSlots($date, $user->id);
+            $employeeFreeSlots = $this->getFreeSlots($occupedSlots);
+
+            foreach ($employeeFreeSlots as $employeeFreeSlot){
+                if (isset($freeSlots[number_format($employeeFreeSlot, 1)])) {
+                    $freeSlots[number_format($employeeFreeSlot, 1)][] = $user->id;
+                } else {
+                    $freeSlots[number_format($employeeFreeSlot, 1)] = [$user->id];
+                }
+            }
+        }
+
+        // Shuffle everything, using reference inside the foreach
+        foreach($freeSlots as &$freeSlot){
+            shuffle($freeSlot);
+        }
+
+        return $freeSlots;
+    }
+
+    public function getOccupedSlots($date, $employee_id) {
         $dateStart = "$date 00:00";
         $dateStop = "$date 23:59";
         $scheduledServices = Booking::withWhereHas('services', function ($query) use ($dateStart, $dateStop, $employee_id) {
@@ -107,44 +135,58 @@ class BookingController extends Controller
             }
         }
 
-        // return response()->json([
-        //     $occupedSlot
-        // ]);
+        return $occupedSlots;
+    }
 
+    public function getFreeSlots($occupedSlots) {
+        $slotDuration = 0.5; // heure
+        $openHourOffice = 10;
+        $closeHourOffice = 18.5;
         $data = [];
 
         for ($i = $openHourOffice; $i < $closeHourOffice; $i = $i + $slotDuration) {
-            if(count($occupedSlots)==0){
+            if (count($occupedSlots) == 0) {
                 $data[] = $i;
             } else {
-                foreach($occupedSlots as $occupedSlot){
+                foreach ($occupedSlots as $occupedSlot) {
                     $date = DateTime::createFromFormat('Y-m-d H:i:s', $occupedSlot->dateStart);
                     $hour = $date->format('H');
                     $minute = $date->format("i");
-                    $hourMinute = $hour+($minute/60);
+                    $hourMinute = $hour + ($minute / 60);
 
 
-                    $endSlot = $hourMinute + ($occupedSlot->duration/60);
+                    $endSlot = $hourMinute + ($occupedSlot->duration / 60);
                     $inbetweenSlots = [];
-                    for($j = $hourMinute; $j <$endSlot; $j = $j +$slotDuration){
+                    for ($j = $hourMinute; $j < $endSlot; $j = $j + $slotDuration) {
                         $inbetweenSlots[] = $j;
                     }
 
-                    if(in_array($i, $inbetweenSlots)){
+                    if (in_array($i, $inbetweenSlots)) {
                         continue;
-
-                    }
-                    else{
+                    } else {
                         $data[] = $i;
                     }
                 }
             }
-
-
-
         }
-        return response()->json([
-            $data
-        ]);
+
+        return $data;
+    }
+
+    public function availability(Request $request)
+    {
+        $date = $request->input('date'); // Format YYYY-MM-DD
+        $employee_id = $request->input('employee_id'); // Interger (0-Infinity)
+
+        if (empty($date) || is_int($employee_id)) {
+            throw new \Exception("Les paramètres 'date' et 'employee_id' doivent être fourni.");
+        }
+
+        if ($employee_id == 0 || $employee_id == '0') {
+            return response()->json($this->getAvailabilityWithoutPreference($date));
+        }
+
+        $occupedSlots = $this->getOccupedSlots($date, $employee_id);
+        return response()->json($this->getFreeSlots($occupedSlots));
     }
 }
