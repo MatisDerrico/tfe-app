@@ -83,7 +83,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('admin/employee')->middleware('auth','isAdmin')->group(function () {
+Route::prefix('employee')->middleware('auth','isEmployee')->group(function () {
     Route::get('/bookings', [EmployeeBookingController::class, 'index'])->name('EmployeeBooking.index');
 });
 
