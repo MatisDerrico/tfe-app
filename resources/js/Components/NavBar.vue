@@ -24,7 +24,12 @@
             <a href="/gallerie" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Gallerie</a>
             <a href="/staff" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Notre équipe</a>
             <a href="/contact" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Contact</a>
-            <a href="/admin/bookings" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Admin</a>
+            <a
+              v-if="page.props.auth.user"
+              href="/admin/bookings"
+              class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">
+              Admin
+            </a>
           </div>
         </div>
         <div class="flex items-center">
@@ -64,5 +69,9 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { CalendarDaysIcon } from '@heroicons/vue/20/solid'
+import { onMounted } from 'vue';
+import { usePage } from '@inertiajs/vue3'
+
+const page = usePage()
 </script>
 

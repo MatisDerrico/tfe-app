@@ -39,10 +39,18 @@
     </div>
     <div class="flex justify-center my-8">
         <Link
-            :href="route('booking.index')"
+            :href="route('EmployeeBooking.index')"
             class="font-semibold text-xs text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-white"
-            >Espace employé</Link
         >
+            Espace employé
+        </Link>
+
+        <Link
+            :href="route('booking.index')"
+            class="ml-8 font-semibold text-xs text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-white"
+        >
+            Espace admin
+        </Link>
     </div>
 </template>
 

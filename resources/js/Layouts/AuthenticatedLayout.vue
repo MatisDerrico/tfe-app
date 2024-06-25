@@ -6,6 +6,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3'
+
+const page = usePage()
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -27,19 +30,37 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('booking.index')" :active="route().current('booking.index')">
+                                <NavLink 
+                                    v-if="page.props.auth.user.is_admin"
+                                    :href="route('booking.index')" :active="route().current('booking.index')"
+                                >
                                     Réservations
                                 </NavLink>
-                                <NavLink :href="route('EmployeeBooking.index')" :active="route().current('EmployeeBooking.index')">
+                                <NavLink 
+                                    v-if="page.props.auth.user.is_employee"
+                                    :href="route('EmployeeBooking.index')" :active="route().current('EmployeeBooking.index')"
+                                >
                                     Réservations par employé
                                 </NavLink>
-                                <NavLink :href="route('serviceAdmin.index')" :active="route().current('serviceAdmin.index')">
+
+                                <NavLink 
+                                    v-if="page.props.auth.user.is_admin"
+                                    :href="route('serviceAdmin.index')" :active="route().current('serviceAdmin.index')"
+                                >
                                     Services
                                 </NavLink>
-                                <NavLink :href="route('employee.index')" :active="route().current('employee.index')">
+
+                                <NavLink
+                                    v-if="page.props.auth.user.is_admin"
+                                    :href="route('employee.index')" :active="route().current('employee.index')"
+                                >
                                     Employées
                                 </NavLink>
-                                <NavLink :href="route('employeeHoliday.index')" :active="route().current('employeeHoliday.index')">
+
+                                <NavLink
+                                    v-if="page.props.auth.user.is_admin"
+                                    :href="route('employeeHoliday.index')" 
+                                    :active="route().current('employeeHoliday.index')">
                                     Congés
                                 </NavLink>
                             </div>
