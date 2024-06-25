@@ -96,6 +96,7 @@
                         </div>
 
                         <div class="mx-auto">
+                            <h4 id="services">Services</h4>
                             <div
                                 v-for="service in filteredServices"
                                 :key="service.id"
@@ -115,12 +116,13 @@
                                 <p class="font-bold">{{ service.price }} €</p>
                             </div>
                         </div>
+
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
                             <InputLabel
                                 class="mt-4 mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                value="Interlocuteur"
+                                value="Choisir un membre de l'équipe"
                             />
 
                             <select
@@ -137,121 +139,116 @@
                                 </option>
                             </select>
 
+                            <div class="w-auto">
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="Pour quand ?"
+                                />
+
+                                <VDatePicker
+                                    v-model.string="form.date"
+                                    mode="date"
+                                    :min-date="new Date()"
+                                    :disabled-dates="employeeHolidays"
+                                    @dayclick="checkDate"
+                                    :masks="masks"
+                                />
+
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.date"
+                                />
+                            </div>
+
+                            <div class="w-auto">
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="À quelle heure ?"
+                                />
+
+                                <div
+                                    v-for="time in Object.keys(
+                                        slotsWithoutPreferences
+                                    )"
+                                    class="flex justify-center"
+                                >
+                                    <span
+                                        @click="
+                                            selectSlot(
+                                                slotsWithoutPreferences,
+                                                service,
+                                                presentFullTime(time),
+                                                slotsWithoutPreferences[time][0]
+                                            )
+                                        "
+                                        :class="`w-1/2 px-1 mb-1 ${
+                                            bookingTime ===
+                                            presentFullTime(time)
+                                                ? 'bg-gray-200'
+                                                : 'bg-white'
+                                        }`"
+                                        >{{ presentTime(time) }}</span
+                                    >
+                                </div>
+
+                                <template
+                                    v-if="
+                                        form.employee_id !== 0 &&
+                                        form.employee_id !== '0' &&
+                                        currentEmployeeSlots
+                                    "
+                                >
+                                    <div
+                                        v-for="time in currentEmployeeSlots"
+                                        class="flex justify-center"
+                                    >
+                                        <span
+                                            @click="
+                                                selectSlot(
+                                                    {},
+                                                    service,
+                                                    presentFullTime(time),
+                                                    form.employee_id
+                                                )
+                                            "
+                                            :class="`w-1/2 px-1 mb-1 ${
+                                                bookingTime ===
+                                                presentFullTime(time)
+                                                    ? 'bg-gray-200'
+                                                    : 'bg-white'
+                                            }`"
+                                            >{{ presentTime(time) }}</span
+                                        >
+                                    </div>
+                                </template>
+                            </div>
+
+                            <InputLabel
+                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                value="Récapitulatif de vos services"
+                            />
+
+                            <div v-if="form.servicesChoosen.length === 0">
+                                Vous n'avez choisi aucun services !
+                                <a href="#services"
+                                    >Choissisez-en au moins un ici.</a
+                                >
+                            </div>
+
                             <div
                                 v-for="service in form.servicesChoosen"
                                 :key="service.id"
                                 class="flex mx-4 my-4"
                             >
                                 <div class="flex flex-col w-full">
-                                    <div class="flex">
-                                        <div class="w-auto">
-                                            <InputLabel
-                                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                                value="Jour"
-                                            />
-
-                                            <VDatePicker
-                                                v-model.string="form.date"
-                                                mode="date"
-                                                :min-date="new Date()"
-                                                :disabled-dates="
-                                                    employeeHolidays
-                                                "
-                                                @dayclick="checkDate"
-                                                :masks="masks"
-                                            />
-
-                                            <InputError
-                                                class="mt-2"
-                                                :message="form.errors.date"
-                                            />
-                                        </div>
-
-                                        <div class="w-1/2">
-                                            <InputLabel
-                                                class="mb-1 block text-sm font-medium leading-6 text-gray-900"
-                                                value="Heure"
-                                            />
-
-                                            <div
-                                                v-for="time in Object.keys(
-                                                    slotsWithoutPreferences
-                                                )"
-                                                class="flex justify-center"
-                                            >
-                                                <span
-                                                    @click="
-                                                        selectSlot(
-                                                            slotsWithoutPreferences,
-                                                            service,
-                                                            presentFullTime(
-                                                                time
-                                                            ),
-                                                            slotsWithoutPreferences[
-                                                                time
-                                                            ][0]
-                                                        )
-                                                    "
-                                                    :class="`w-1/2 px-1 mb-1 ${
-                                                        service.isActive ===
-                                                        presentFullTime(time)
-                                                            ? 'bg-gray-200'
-                                                            : 'bg-white'
-                                                    }`"
-                                                    >{{
-                                                        presentTime(time)
-                                                    }}</span
-                                                >
-                                            </div>
-
-                                            <template
-                                                v-if="
-                                                    form.employee_id !== 0 &&
-                                                    form.employee_id !== '0' &&
-                                                    currentEmployeeSlots
-                                                "
-                                            >
-                                                <div
-                                                    v-for="time in currentEmployeeSlots"
-                                                    class="flex justify-center"
-                                                >
-                                                    <span
-                                                        @click="
-                                                            selectSlot(
-                                                                {},
-                                                                service,
-                                                                presentFullTime(
-                                                                    time
-                                                                ),
-                                                                form.employee_id
-                                                            )
-                                                        "
-                                                        :class="`w-1/2 px-1 mb-1 ${
-                                                            service.isActive ===
-                                                            presentFullTime(
-                                                                time
-                                                            )
-                                                                ? 'bg-gray-200'
-                                                                : 'bg-white'
-                                                        }`"
-                                                        >{{
-                                                            presentTime(time)
-                                                        }}</span
-                                                    >
-                                                </div>
-                                            </template>
-
-                                            <InputError
-                                                class="mt-2"
-                                                :message="form.errors.hour"
-                                            />
-                                        </div>
-                                    </div>
                                     <div class="flex justify-between">
                                         <div class="flex">
                                             <h2>{{ service.name }}</h2>
                                             <p class="ml-4 font-bold">
                                                 {{ service.price }} €
+                                            </p>
+                                            <p class="ml-4 font-bold">
+                                                Durée: {{ service.duration }} €
                                             </p>
                                         </div>
                                         <img
@@ -324,6 +321,7 @@ const filteredServices = ref([]);
 const filteredEmployees = ref([]);
 const slotsWithoutPreferences = ref({});
 const currentEmployeeSlots = ref(undefined);
+const bookingTime = ref(undefined);
 const employeeHolidays = ref([]);
 
 const props = defineProps({
@@ -336,11 +334,10 @@ const masks = ref({
 });
 
 function selectSlot(freeSlots, service, time, employeeId) {
-    service.isActive = false;
+    bookingTime.value = time;
     // TODO: Use freeSlots and service.duration to check ifwe are really able to selectthe choosed slot
     form.bookingDate = `${form.date} ${time}:00`;
     form.employee_id = employeeId;
-    service.isActive = time;
     console.log("form.bookingDate", form.bookingDate);
     console.log("employeeId", employeeId);
 }
@@ -374,16 +371,18 @@ function formatDate(date) {
     return date.toISOString().split("T")[0];
 }
 
+function getTotalDuration(services) {
+    return services.reduce((acc, service) => acc + service.duration, 0);
+}
+
 function getFreeSlots(date, employeeId) {
     console.log("date", date, form.employee_id);
 
-    /*if (!date) {
-        console.log("no date bruh");
-        return;
-    }*/
-
-    // const date = formatDate(datetime);
-    fetch(`/booking/availability?date=${date}&employee_id=${employeeId}`)
+    fetch(
+        `/booking/availability?date=${date}&employee_id=${employeeId}&duration=${getTotalDuration(
+            form.servicesChoosen
+        )}`
+    )
         .then((response) => response.json())
         .then((data) => {
             slotsWithoutPreferences.value = {};
