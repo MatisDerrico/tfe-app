@@ -1,15 +1,12 @@
 <template>
+    <Head title="Nos services" />
 
-
-<Head title="Nos services" />
-
-<div
+    <div
         class="bg-black relative flex-col sm:flex sm:justify-center sm:items-center min-h-screen"
     >
+        <NavBar />
 
-<NavBar/>
-
-<div
+        <div
             class="h-[500px] relative isolate overflow-hidden bg-gray-900 w-full py-24 sm:py-32"
         >
             <img
@@ -95,40 +92,51 @@
             </div>
         </div>
 
+        <div class="bg-black py-12 w-full sm:w-11/12">
+            <h2
+                class="mb-10 text-center font-semibold text-2xl text-white leading-tight"
+            >
+                Carte des services
+            </h2>
+            <div class="max-w-5xl mx-auto px-6 lg:px-0">
+                <div class="bg-black overflow-hidden shadow-sm sm:rounded-lg">
+                    <div
+                        class="bg-black my-8"
+                        v-for="(serviceType, index) in services"
+                        :key="index"
+                    >
+                        <h2 class="text-gray-300 font-bold text-center text-3xl mb-4">
+                            {{ serviceType[0].type }}
+                        </h2>
 
+                        <hr class="my-2">
 
-
-    <div class="bg-black py-12 w-full sm:w-11/12">
-        <h2 class="mb-10 text-center font-semibold text-2xl text-white leading-tight">Carte des services</h2>
-        <div class="max-w-5xl mx-auto px-6 lg:px-0">
-            <div class="bg-black overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="bg-black my-8" v-for="(serviceType, index) in services">
-                    <h3 class="text-gray-300 font-bold text-2xl mb-4">{{ serviceType[0].type }}</h3>
-                    <div class="flex flex-col min-w-full divide-y divide-gray-300">
-    <div class="flex justify-between bg-black py-3.5">
-        <div class="w-1/4 px-3 text-left text-lg font-semibold text-white">Services</div>
-        <div class="w-1/2 px-3 text-left text-lg font-semibold text-white">Description</div>
-        <div class="w-1/4 px-3 text-right text-lg font-semibold text-white">Prix</div>
-    </div>
-    <div v-for="service in serviceType" :key="service.id" class="flex justify-between bg-black py-4">
-        <div class="w-1/4 px-3 text-sm text-white">{{ service.name }}</div>
-        <div class="w-1/2 px-3 text-sm text-white">{{ service.description }}</div>
-        <div class="w-1/4 px-3 text-sm text-white text-right">{{ service.price }} €</div>
-    </div>
-</div>
-
-
+                        <div
+                            v-for="service in serviceType"
+                            :key="service.id"
+                            class="flex justify-between bg-black py-4"
+                        >
+                            <div class="flex flex-col">
+                                <h3 class="mb-4 text-xl text-white">
+                                    {{ service.name }}
+                                </h3>
+                                <p class="text-white text-lg">{{ service.description }}</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-white text-lg">{{ service.price }} €</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <PageFooter />
     </div>
-    <PageFooter />
-</div>
 </template>
 
 <script setup>
-
-import { Head } from '@inertiajs/vue3';
+import { Head } from "@inertiajs/vue3";
 import NavBar from "@/Components/NavBar.vue";
 import PageFooter from "@/Components/PageFooter.vue";
 
@@ -158,5 +166,4 @@ const cards = [
         icon: MapPinIcon,
     },
 ];
-
 </script>

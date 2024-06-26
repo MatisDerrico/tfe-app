@@ -32,7 +32,7 @@ class BookingController extends Controller
          */
         $bookings = Booking::with(['services'])->get();
 
-        //  dd($bookings);
+       
 
         return Inertia::render('Bookings/index', [
             'bookings' => $bookings,
