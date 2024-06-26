@@ -166,12 +166,7 @@
                                     value="À quelle heure ?"
                                 />
 
-                                <div
-                                    v-for="time in Object.keys(
-                                        slotsWithoutPreferences
-                                    )"
-                                    class="flex justify-center"
-                                >
+                                <div v-for="time in Object.keys(slotsWithoutPreferences ?? {})" class="flex justify-center">
                                     <span
                                         @click="
                                             selectSlot(
@@ -187,8 +182,8 @@
                                                 ? 'bg-gray-200'
                                                 : 'bg-white'
                                         }`"
-                                        >{{ presentTime(time) }}</span
-                                    >
+                                        >{{ presentTime(time) }}
+                                    </span>
                                 </div>
 
                                 <template
@@ -379,7 +374,7 @@ function getFreeSlots(date, employeeId) {
     console.log("date", date, form.employee_id);
 
     fetch(
-        `/booking/availability?date=${date}&employee_id=${employeeId}&duration=${getTotalDuration(
+        `/booking/availability?date=${date ?? formatDate(new Date())}&employee_id=${employeeId}&duration=${getTotalDuration(
             form.servicesChoosen
         )}`
     )
@@ -390,9 +385,9 @@ function getFreeSlots(date, employeeId) {
 
             console.log("data", data);
             if (form.employee_id === 0 || form.employee_id === "0") {
-                slotsWithoutPreferences.value = data;
+                slotsWithoutPreferences.value = data.eligibleStartSlots;
             } else {
-                currentEmployeeSlots.value = data;
+                currentEmployeeSlots.value = data.eligibleStartSlots;
             }
         })
         .catch((error) => console.error(error));
@@ -400,26 +395,6 @@ function getFreeSlots(date, employeeId) {
 
 const checkDate = () => {
     getFreeSlots(form.date, form.employee_id);
-
-    /*    axios
-        .get("/time/" + form.date + "/" + form.employee_id)
-        .then((response) => {
-            const hoursToRemove = response.data;
-
-            // Récupérer l'élément select
-            let hourSelect = document.getElementById("hourSelect");
-
-            // Parcourir les options et supprimer celles qui correspondent aux heures à supprimer
-            for (let i = hourSelect.options.length - 1; i >= 0; i--) {
-                const option = hourSelect.options[i];
-
-                if (hoursToRemove.includes(option.value)) {
-                    hourSelect.remove(i);
-                }
-
-                // console.log(hourSelect.options);
-            }
-        });*/
 };
 
 const filterServicesAndEmployees = (type) => {
@@ -462,6 +437,8 @@ const calculateTotalPrice = () => {
     form.servicesChoosen.forEach((service) => {
         form.price += service.price;
     });
+
+    getFreeSlots(form.date, form.employee_id);
 };
 
 // Suppression d'un service et mise à jour du prix

@@ -18,9 +18,11 @@ use stdClass;
 class BookingController extends Controller
 {
     /**
-     *Expressed in hours
+     * Expressed in hours
      */
     private $slotDuration = 0.5;
+    private $openHourOffice = 10;
+    private $closeHourOffice = 18.5;
 
     public function index()
     {
@@ -59,16 +61,23 @@ class BookingController extends Controller
             'price' => $request->price
         ]);
 
+        $startTimeInSeconds = strtotime($request->bookingDate);
+        $choosenServices = $request->servicesChoosen;
+
         // Etape 2 : Lien entre réservation et services et employés
-        foreach ($request->servicesChoosen as $service) {
+        foreach ($choosenServices as $choosenService) {
+            $service = Service::find($choosenService['id']);
+
             DB::table('booking_service')->insert([
                 'booking_id' => $booking->id,
-                'service_id' => $service['id'],
+                'service_id' => $choosenService['id'],
                 'employee_id' => $request->employee_id,
                 // 'date' => $request->date . ' ' . $request->hour . ":" . $request->minute,
-                'date' => $request->bookingDate,
-                'time' => $request->hour . ":" . $request->minute
+                'date' => date('Y-m-d H:i:s', $startTimeInSeconds),
+                'time' => $request->hour . ":" . $request->minute // Obsolete/Deprecated
             ]);
+
+            $startTimeInSeconds += ($service->duration * 60);
         }
 
         // Etape 3 : envoi du mail de confirmation
@@ -101,17 +110,21 @@ class BookingController extends Controller
          * }
          */
         $freeSlots = [];
+        // $debug = [];
 
         foreach($users as $user){
-            $occupedSlots = $this->getOccupedSlots($date, $user->id);
+            $occupedSlots = $this->getBookingServicesAt($date, $user->id);
             $employeeFreeSlots = $this->getFreeSlots($occupedSlots, $totalDuration);
-            $employeeEligibleSlots = $this->getEligibleStartSlots($freeSlots, $totalDuration);
+            $employeeEligibleSlots = $this->getEligibleStartSlots($employeeFreeSlots, $totalDuration);
+            // $debug[$user->id] = $employeeFreeSlots;
 
             foreach ($employeeEligibleSlots as $employeeEligibleSlot){
-                if (isset($freeSlots[number_format($employeeEligibleSlot, 1)])) {
-                    $freeSlots[number_format($employeeEligibleSlot, 1)][] = $user->id;
+                $key = number_format($employeeEligibleSlot, 1);
+
+                if (isset($freeSlots[$key])) {
+                    $freeSlots[$key][] = $user->id;
                 } else {
-                    $freeSlots[number_format($employeeEligibleSlot, 1)] = [$user->id];
+                    $freeSlots[$key] = [$user->id];
                 }
             }
         }
@@ -121,10 +134,13 @@ class BookingController extends Controller
             shuffle($freeSlot);
         }
 
-        return $freeSlots;
+        return [
+            'freeSlots' => $freeSlots,
+            'eligibleStartSlots' => $freeSlots,
+        ];
     }
 
-    public function getOccupedSlots($date, $employee_id) {
+    public function getBookingServicesAt($date, $employee_id) {
         $dateStart = "$date 00:00";
         $dateStop = "$date 23:59";
         $scheduledServices = Booking::withWhereHas('services', function ($query) use ($dateStart, $dateStop, $employee_id) {
@@ -144,38 +160,40 @@ class BookingController extends Controller
         return $occupedSlots;
     }
 
-    public function getFreeSlots($occupedSlots){
-        $openHourOffice = 10;
-        $closeHourOffice = 18.5;
+    public function getFreeSlots($bookingServices){
         $data = [];
 
-        for ($i = $openHourOffice; $i < $closeHourOffice; $i = $i + $this->slotDuration) {
-            if (count($occupedSlots) == 0) {
-                $data[] = $i;
-            } else {
-                foreach ($occupedSlots as $occupedSlot) {
-                    $date = DateTime::createFromFormat('Y-m-d H:i:s', $occupedSlot->dateStart);
-                    $hour = $date->format('H');
-                    $minute = $date->format("i");
-                    $hourMinute = $hour + ($minute / 60);
+        $occupiedSlots = [];
+        // Computes slots that are occupied
+        foreach ($bookingServices as $bookingService) {
+            $date = DateTime::createFromFormat('Y-m-d H:i:s', $bookingService->dateStart);
+            $hour = $date->format('H');
+            $minute = $date->format("i");
+            $hourMinute = $hour + ($minute / 60);
 
+            // Add first slot
+            if (!in_array($hourMinute, $occupiedSlots)) {
+                $occupiedSlots[] = $hourMinute;
+            }
 
-                    $endSlot = $hourMinute + ($occupedSlot->duration / 60);
-                    $inbetweenSlots = [];
-                    for ($j = $hourMinute; $j < $endSlot; $j = $j + $this->slotDuration) {
-                        $inbetweenSlots[] = $j;
-                    }
+            $endSlot = $hourMinute + ($bookingService->duration / 60);
 
-                    if (in_array($i, $inbetweenSlots)) {
-                        continue;
-                    } else {
-                        $data[] = $i;
-                    }
+            for ($j = $hourMinute; $j < $endSlot; $j = $j + $this->slotDuration) {
+                if (!in_array($j, $occupiedSlots)) {
+                    $occupiedSlots[] = $j;
                 }
             }
         }
 
-        return $data;
+        // Create an array of the free slots
+        $freeSlots = [];
+        for ($i = $this->openHourOffice; $i < $this->closeHourOffice; $i = $i + $this->slotDuration) {
+            if (!in_array($i, $occupiedSlots)) {
+                $freeSlots[] = $i;
+            }
+        }
+
+        return $freeSlots;
     }
 
     public function getSuite($freeSlots, $currentIndex, $count) {
@@ -210,7 +228,7 @@ class BookingController extends Controller
         $totalDuration = $request->input('duration'); // Interger (0-Infinity)
 
         if ($totalDuration == 0) {
-            throw new \Exception("Le temps cumulé de vos services est de zéro. Vous ne pouvez pas réserver en l'état.");
+            return response()->json([]);
         }
 
         if (empty($date) || is_int($employee_id)) {
@@ -221,9 +239,13 @@ class BookingController extends Controller
             return response()->json($this->getAvailabilityWithoutPreference($date, $totalDuration));
         }
 
-        $occupedSlots = $this->getOccupedSlots($date, $employee_id);
+        $occupedSlots = $this->getBookingServicesAt($date, $employee_id);
         $freeSlots = $this->getFreeSlots($occupedSlots);
         $data = $this->getEligibleStartSlots($freeSlots, $totalDuration);
-        return response()->json($data);
+        return response()->json([
+            'occupedSlots' => $occupedSlots,
+            'freeSlots' => $freeSlots,
+            'eligibleStartSlots' => $data,
+        ]);
     }
 }
