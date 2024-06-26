@@ -106,6 +106,10 @@
                     v-model="form.message"
                         required>
                     </textarea>
+                    <InputError
+                       class="mt-2"
+                        :message="form.errors.message"
+                        />
 
                     </div>
                 </div>
