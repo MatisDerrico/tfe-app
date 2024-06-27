@@ -243,7 +243,7 @@
                                                 {{ service.price }} €
                                             </p>
                                             <p class="ml-4 font-bold">
-                                                Durée: {{ service.duration }} €
+                                                Durée: {{ service.duration }} min
                                             </p>
                                         </div>
                                         <img
